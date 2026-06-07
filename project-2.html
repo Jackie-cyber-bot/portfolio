@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecorMatters | Jiaqi Gu</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-hero {
+            width: 100%;
+            aspect-ratio: 16 / 7;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        .project-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Timeline nav — same as Zoox */
+        .timeline-nav {
+            position: fixed;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 100;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+        .timeline-dot-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .timeline-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(184,112,78,0.45);
+            flex-shrink: 0;
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+            z-index: 1;
+        }
+        .timeline-line {
+            width: 1.5px;
+            height: 28px;
+            background: rgba(184,112,78,0.3);
+        }
+        .timeline-item:last-child .timeline-line {
+            display: none;
+        }
+        .timeline-label {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(184,112,78,0.5);
+            white-space: nowrap;
+            transition: color 0.25s, opacity 0.25s;
+            opacity: 0.5;
+            font-family: var(--font-body, sans-serif);
+            padding-bottom: 28px;
+        }
+        .timeline-item:hover .timeline-label,
+        .timeline-item.active .timeline-label {
+            opacity: 1;
+        }
+        .timeline-item.active .timeline-dot {
+            background: #B8704E;
+            transform: scale(1.5);
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+        .timeline-item.active .timeline-label {
+            opacity: 1;
+            color: #B8704E;
+        }
+        .timeline-item:hover .timeline-dot {
+            background: #B8704E;
+            box-shadow: 0 0 6px 3px rgba(184,112,78,0.5);
+        }
+        .timeline-item:hover .timeline-label {
+            opacity: 1;
+            color: #B8704E;
+        }
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 4px 2px rgba(184,112,78,0.5), 0 0 10px 4px rgba(184,112,78,0.25); }
+            50%       { box-shadow: 0 0 8px 4px rgba(184,112,78,0.8), 0 0 20px 8px rgba(184,112,78,0.4); }
+        }
+        @media (max-width: 1100px) {
+            .timeline-nav { display: none; }
+        }
+
+        .project-section-title { color: #B8704E; }
+        [id^="section-"] { scroll-margin-top: 100px; }
+
+        /* Stat cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 32px 0;
+        }
+        .impact-card {
+            background: rgba(184,112,78,0.06);
+            border: 1px solid rgba(184,112,78,0.18);
+            border-radius: 12px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .impact-number {
+            font-family: var(--font-heading);
+            font-size: 40px;
+            font-weight: 400;
+            color: #B8704E;
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        .impact-label {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Process steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 32px 0;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .process-step {
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            gap: 20px;
+            align-items: start;
+            position: relative;
+        }
+        .process-step:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 32px;
+            bottom: -8px;
+            width: 1px;
+            background: rgba(184,112,78,0.2);
+        }
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(184,112,78,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #B8704E;
+            flex-shrink: 0;
+            background: var(--bg-primary);
+            z-index: 1;
+        }
+        .step-body {
+            padding-bottom: 32px;
+            text-align: left;
+        }
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+        .step-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            border-left: 2px solid #B8704E;
+            padding: 12px 20px;
+            margin: 32px auto;
+            max-width: 580px;
+            text-align: left;
+        }
+        .pull-quote p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-style: italic;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Jiaqi Gu" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link" data-section="work">Work</a></li>
+                <li><a href="index.html#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="timeline-nav" aria-label="Page sections">
+        <a href="#section-overview" class="timeline-item" data-target="section-overview">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
+            <span class="timeline-label">Overview</span>
+        </a>
+        <a href="#section-work" class="timeline-item" data-target="section-work">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
+            <span class="timeline-label">The Work</span>
+        </a>
+        <a href="#section-process" class="timeline-item" data-target="section-process">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
+            <span class="timeline-label">Process<br>Improvement</span>
+        </a>
+        <a href="#section-impact" class="timeline-item" data-target="section-impact">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
+            <span class="timeline-label">Impact</span>
+        </a>
+    </nav>
+
+    <div class="project-hero">
+        <img src="images/decor1.jpg" alt="DecorMatters">
+    </div>
+
+    <main class="project-detail-section">
+        <div class="container">
+
+            <header class="project-header">
+                <h1 class="project-detail-title">DecorMatters</h1>
+                <p class="project-detail-subtitle">Design Operations internship. Owning the visual content pipeline behind weekly design challenges that drive user engagement and subscription growth.</p>
+            </header>
+
+            <div class="project-meta">
+                <div class="project-meta-item">
+                    <h3>Role</h3>
+                    <p>Design Operations Intern</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Company</h3>
+                    <p>DecorMatters</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Timeline</h3>
+                    <p>March to May 2026</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Tools</h3>
+                    <p>Figma · Admin CMS</p>
+                </div>
+            </div>
+
+            <div class="project-content">
+
+                <div class="project-text" id="section-overview">
+                    <h2 class="project-section-title">Overview</h2>
+                    <p class="project-paragraph">
+                        DecorMatters is a home design app where users participate in weekly challenges: decorating virtual rooms within a curated set of visual constraints. The quality of each challenge directly shapes how deeply users engage with the platform, and sustained engagement is what moves users toward a premium subscription.
+                    </p>
+                    <p class="project-paragraph">
+                        As a Design Operations Intern, I owned the end-to-end production of weekly challenges: sourcing images, selecting furniture, configuring each room, and maintaining visual consistency at scale. Roughly 36 challenges per week, across a two-week cycle each month.
+                    </p>
+                </div>
+
+                <div class="project-text" id="section-work">
+                    <h2 class="project-section-title">The Work</h2>
+                    <p class="project-paragraph">
+                        Each challenge required three things to work together: a compelling backdrop, furniture that felt intentional rather than assembled, and a configuration that gave users meaningful creative choices. None of that could be templated. Every room had to feel considered.
+                    </p>
+                    <p class="project-paragraph">
+                        The weekly workflow moved through four stages:
+                    </p>
+
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-num">01</span>
+                            <div class="step-body">
+                                <p class="step-title">Visual Research</p>
+                                <p class="step-desc">Sourcing reference images and interior trends to define the visual direction for the week's challenge set. Keeping 36 challenges fresh week after week required active research, not re-using what already worked.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-num">02</span>
+                            <div class="step-body">
+                                <p class="step-title">Image Curation</p>
+                                <p class="step-desc">Selecting backdrop, template, and contest images against three criteria: visual style consistency, content authenticity, and creative appeal. Every image needed to feel real and inviting, not generic.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-num">03</span>
+                            <div class="step-body">
+                                <p class="step-title">Furniture Selection & Styling</p>
+                                <p class="step-desc">Pairing furniture from the app's catalog to match each room's visual direction. Style, scale, and color had to read as a coherent set, not a collection of items that happened to fit.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-num">04</span>
+                            <div class="step-body">
+                                <p class="step-title">Challenge Configuration</p>
+                                <p class="step-desc">Defining placement requirements, item categories, and creative constraints in the admin CMS to shape how users would interact with and personalize each space.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pull-quote">
+                        <p>High volume and creative freshness rarely coexist. Producing 36 challenges a week without repeating visual patterns or losing quality required a system, not just effort.</p>
+                    </div>
+                </div>
+
+                <div class="project-text" id="section-process">
+                    <h2 class="project-section-title">Process Improvement</h2>
+                    <p class="project-paragraph">
+                        The most time-consuming part of the workflow was furniture selection. Without a clear system, choosing pieces for each room meant browsing the full catalog repeatedly, which was slower to execute and inconsistent across challenges.
+                    </p>
+                    <p class="project-paragraph">
+                        I proposed and implemented an improvement to the furniture selection process: organizing available pieces by style category and visual grouping, so the right furniture could be identified faster without sacrificing intentionality.
+                    </p>
+                    <p class="project-paragraph">
+                        The result was a more repeatable process that reduced selection time while improving the coherence of each styled room. It also made it easier to maintain quality across the full weekly volume without relying on memory or trial and error each cycle.
+                    </p>
+                </div>
+
+                <div class="project-text" id="section-impact">
+                    <h2 class="project-section-title">Impact</h2>
+                    <p class="project-paragraph">
+                        Challenges are the core engagement loop of the DecorMatters platform. Strong visual content keeps users returning, building the habit that eventually leads to a subscription upgrade. The challenges I produced were a direct part of that loop.
+                    </p>
+
+                    <div class="impact-grid">
+                        <div class="impact-card">
+                            <div class="impact-number">36</div>
+                            <div class="impact-label">challenges produced per week</div>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-number">~2wk</div>
+                            <div class="impact-label">production cycle owned end-to-end each month</div>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-number">+23.4%</div>
+                            <div class="impact-label">subscription growth during the internship period</div>
+                        </div>
+                    </div>
+
+                    <p class="project-paragraph">
+                        Premium membership unlocks AI-powered design suggestions and the ability to decorate rooms using personal photos. These features only become available after users pass an engagement milestone. The challenges I configured were part of the experience that moved users toward that threshold.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="project-navigation">
+                <a href="project-1.html" class="project-nav-link">← Previous Project</a>
+                <a href="project-3.html" class="project-nav-link">Next Project →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© <span id="current-year">2024</span> Jiaqi Gu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        (function () {
+            const items = document.querySelectorAll('.timeline-item');
+            const sections = Array.from(items).map(item =>
+                document.getElementById(item.dataset.target)
+            ).filter(Boolean);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        items.forEach(i => i.classList.remove('active'));
+                        const active = document.querySelector(`.timeline-item[data-target="${entry.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-10% 0px -80% 0px' });
+
+            sections.forEach(s => observer.observe(s));
+
+            // Activate last item when scrolled near bottom of page
+            window.addEventListener('scroll', () => {
+                const scrollBottom = window.scrollY + window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+                if (scrollBottom >= docHeight - 80) {
+                    items.forEach(i => i.classList.remove('active'));
+                    items[items.length - 1].classList.add('active');
+                }
+            }, { passive: true });
+
+            items.forEach(item => {
+                item.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.getElementById(item.dataset.target);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

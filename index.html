@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jiaqi Gu — Product Designer</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,300;1,6..96,400&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Jiaqi Gu" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link" data-section="work">Work</a></li>
+                <li><a href="index.html#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero (full-width, outside container) -->
+    <div class="hero-section">
+        <div class="hero-inner container">
+                    <div class="hero-left">
+                        <h1 class="hero-name">Jiaqi<br>Gu</h1>
+                    </div>
+                    <div class="hero-right">
+                        <p class="hero-role-label">Product Designer</p>
+                        <div class="hero-rule"></div>
+                        <p class="hero-bio">Fashion trained. Business minded.<br>I design digital experiences that are visually refined and strategically grounded.</p>
+                        <div class="social-links">
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="about-icon-link" aria-label="Email">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/jiaqi-gu-3b316827a" target="_blank" class="about-icon-link" aria-label="LinkedIn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                    <rect x="2" y="9" width="4" height="12"/>
+                                    <circle cx="4" cy="4" r="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!-- Work Section -->
+    <main class="work-section" id="work">
+        <div class="container">
+            <div class="work-list show-all-grid">
+                <!-- App Design (featured – full row) -->
+                <div class="work-category work-category-featured" data-category="app-design">
+                    <h3 class="work-category-title" style="display: none;">App Design</h3>
+                    <div class="work-item-full">
+                        <article class="work-item work-item-with-media work-item-featured">
+                            <a href="project-1.html" class="work-link work-link-row">
+                                <div class="work-item-media-container" style="background-image: url('images/zoox.png');"></div>
+                                <div class="work-item-content-container work-item-content-featured">
+                                    <span class="work-item-tag">Product Design</span>
+                                    <h2 class="work-item-title">Nook</h2>
+                                    <p class="work-item-subtitle">Zoox × Academy of Art University — a compact autonomous pod for exploring the city.</p>
+                                    <div class="work-item-award">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+                                        Most Innovative — Bay Area Design Challenge
+                                    </div>
+                                    <div class="work-item-award">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+                                        UX/UI Design Award — Academy of Art University Spring Show
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Web Design -->
+                <div class="work-category" data-category="web-design">
+                    <h3 class="work-category-title" style="display: none;">Web Design</h3>
+                    <div class="work-item-full">
+                        <article class="work-item work-item-with-media">
+                            <a href="project-2.html" class="work-link work-link-column">
+                                <div class="work-item-media-container" style="background-image: url('images/decormatters.png');"></div>
+                                <div class="work-item-content-container">
+                                    <span class="work-item-tag">Design Operations</span>
+                                    <h2 class="work-item-title">DecorMatters</h2>
+                                    <p class="work-item-subtitle">Design Ops Internship — visual content at scale.</p>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Rebranding -->
+                <div class="work-category" data-category="rebranding">
+                    <h3 class="work-category-title" style="display: none;">Rebranding</h3>
+                    <div class="work-item-full">
+                        <article class="work-item work-item-with-media">
+                            <a href="project-3.html" class="work-link work-link-column">
+                                <div class="work-item-media-container" style="background-image: url('images/tarot.png');"></div>
+                                <div class="work-item-content-container">
+                                    <span class="work-item-tag">App & Web</span>
+                                    <h2 class="work-item-title">Mira Tarot</h2>
+                                    <p class="work-item-subtitle">From iOS app to gesture-driven web, two platforms, one ritual.</p>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Web Design 2 -->
+                <div class="work-category" data-category="web-design">
+                    <h3 class="work-category-title" style="display: none;">Web Design</h3>
+                    <div class="work-item-full">
+                        <article class="work-item work-item-with-media">
+                            <a href="project-4.html" class="work-link work-link-column">
+                                <div class="work-item-media-container" style="background-image: url('images/emotional.png');"></div>
+                                <div class="work-item-content-container">
+                                    <span class="work-item-tag">AR · App Design</span>
+                                    <h2 class="work-item-title">Melloow</h2>
+                                    <p class="work-item-subtitle">An AR app where emotions become objects you can throw away.</p>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- About Section -->
+    <section class="page-section" id="about">
+        <div class="container">
+            <h1 class="page-title about-fade" style="transition-delay:0s">About</h1>
+
+            <div class="about-layout">
+                <div class="about-text-col">
+                    <p class="about-text about-fade" style="transition-delay:0.15s">
+                        Hi, I'm Jiaqi Gu — a Product Designer with backgrounds in fashion and business. I'm drawn to the space where user needs, aesthetics, and business goals meet, and I believe good design makes all three better.
+                    </p>
+                    <p class="about-text about-fade" style="transition-delay:0.25s">
+                        My path from business to fashion merchandising to product design gives me a cross-disciplinary perspective. I think about products not just as interfaces, but as experiences with real user and business impact.
+                    </p>
+                    <p class="about-text about-fade" style="transition-delay:0.35s">
+                        I work fluidly between design and prototyping, using AI-assisted workflows and vibe coding to bring ideas to life quickly and test them in real environments.
+                    </p>
+
+                    <div class="about-section about-fade" style="transition-delay:0.45s">
+                        <p class="about-section-label">Design Operations</p>
+                        <ul class="about-tools-list">
+                            <li>Content management at scale</li>
+                            <li>Visual consistency systems</li>
+                            <li>CMS workflow & asset management</li>
+                            <li>Cross-functional collaboration</li>
+                            <li>Design system documentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section about-fade" style="transition-delay:0.45s">
+                        <p class="about-section-label">Tools</p>
+                        <ul class="about-tools-list">
+                            <li>Figma</li>
+                            <li>Adobe Photoshop</li>
+                            <li>Adobe Illustrator</li>
+                            <li>Adobe After Effects</li>
+                            <li>Claude Code</li>
+                            <li>Cursor</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section about-fade" style="transition-delay:0.55s">
+                        <p class="about-section-label">Education</p>
+                        <p class="about-edu-item">MA, UX/UI Design — Academy of Art University</p>
+                        <p class="about-edu-item">MA, Fashion Merchandising — Academy of Art University</p>
+                        <p class="about-edu-item">BA, Business Administration — Northwood University</p>
+                    </div>
+
+                    <div class="about-section about-fade" style="transition-delay:0.60s">
+                        <p class="about-section-label">Awards</p>
+                        <div class="about-award-item">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+                            <div>
+                                <p class="about-award-title">Most Innovative</p>
+                                <p class="about-award-sub">Bay Area Design Challenge</p>
+                            </div>
+                        </div>
+                        <div class="about-award-item">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+                            <div>
+                                <p class="about-award-title">UX/UI Design Award</p>
+                                <p class="about-award-sub">Academy of Art University — Spring Show</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-contact about-fade" style="transition-delay:0.65s">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="about-email">jiaqig15@gmail.com</a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="about-icon-link" aria-label="Email">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/jiaqi-gu-3b316827a" target="_blank" class="about-icon-link" aria-label="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="resume-download about-fade" style="transition-delay:0.75s">
+                        <a href="images/jiaqi_gu_resume.pdf" class="btn" download>Download Resume</a>
+                    </div>
+                </div>
+                <div class="about-photo-col about-fade" style="transition-delay:0.25s">
+                    <img src="images/me.PNG" alt="Jiaqi Gu" class="about-photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© <span id="current-year">2024</span> Jiaqi Gu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

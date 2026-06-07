@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melloow | Jiaqi Gu</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-hero {
+            width: 100%;
+            aspect-ratio: 16 / 7;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        .project-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            background: rgba(26, 26, 26, 0.05);
+            border: 1.5px dashed rgba(26, 26, 26, 0.18);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 40px 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .img-placeholder span { font-family: var(--font-body); color: var(--text-secondary); font-size: 13px; }
+        .img-placeholder .placeholder-label {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .img-placeholder.hero-placeholder {
+            aspect-ratio: 16 / 7;
+            border-radius: 0;
+            margin: 0;
+            border: none;
+            background: rgba(26, 26, 26, 0.07);
+        }
+        .img-placeholder.wide { aspect-ratio: 16 / 5; }
+        .img-placeholder.tall { aspect-ratio: 4 / 3; }
+        .img-placeholder.phone { aspect-ratio: 9 / 16; }
+        .img-placeholder.video { aspect-ratio: 16 / 9; }
+
+        .screenshots-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .screenshots-row-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        @media (max-width: 768px) {
+            .screenshots-row,
+            .screenshots-row-2 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        .quote-block {
+            border-left: 2px solid var(--accent);
+            padding: 16px 24px;
+            margin: 32px 0;
+        }
+        .quote-block p {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .quote-block cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-style: normal;
+        }
+
+        /* Timeline nav */
+        .timeline-nav {
+            position: fixed;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 100;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+        .timeline-dot-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .timeline-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(184,112,78,0.45);
+            flex-shrink: 0;
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+            z-index: 1;
+        }
+        .timeline-line {
+            width: 1.5px;
+            height: 28px;
+            background: rgba(184,112,78,0.3);
+        }
+        .timeline-item:last-child .timeline-line { display: none; }
+        .timeline-label {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(184,112,78,0.5);
+            white-space: nowrap;
+            transition: color 0.25s, opacity 0.25s;
+            opacity: 0.5;
+            font-family: var(--font-body, sans-serif);
+            padding-bottom: 28px;
+        }
+        .timeline-item:hover .timeline-label,
+        .timeline-item.active .timeline-label { opacity: 1; }
+        .timeline-item.active .timeline-dot {
+            background: #B8704E;
+            transform: scale(1.5);
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+        .timeline-item.active .timeline-label { opacity: 1; color: #B8704E; }
+        .timeline-item:hover .timeline-dot {
+            background: #B8704E;
+            box-shadow: 0 0 6px 3px rgba(184,112,78,0.5);
+        }
+        .timeline-item:hover .timeline-label { opacity: 1; color: #B8704E; }
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 4px 2px rgba(184,112,78,0.5), 0 0 10px 4px rgba(184,112,78,0.25); }
+            50%       { box-shadow: 0 0 8px 4px rgba(184,112,78,0.8), 0 0 20px 8px rgba(184,112,78,0.4); }
+        }
+        @media (max-width: 900px) { .timeline-nav { display: none; } }
+
+        .project-section-title { color: #B8704E; }
+        [id^="section-"] { scroll-margin-top: 100px; }
+
+        body { background-color: #F6EEEA !important; }
+        .navbar { background-color: #F6EEEA !important; }
+        .footer { background-color: #F6EEEA !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Jiaqi Gu" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link" data-section="work">Work</a></li>
+                <li><a href="index.html#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="timeline-nav" aria-label="Page sections">
+        <a href="#section-overview" class="timeline-item" data-target="section-overview">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Overview</span>
+        </a>
+        <a href="#section-research" class="timeline-item" data-target="section-research">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Research</span>
+        </a>
+        <a href="#section-insight" class="timeline-item" data-target="section-insight">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Key Insight</span>
+        </a>
+        <a href="#section-persona" class="timeline-item" data-target="section-persona">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Who It's For</span>
+        </a>
+        <a href="#section-solution" class="timeline-item" data-target="section-solution">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">The Solution</span>
+        </a>
+        <a href="#section-design" class="timeline-item" data-target="section-design">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Design System</span>
+        </a>
+        <a href="#section-iterations" class="timeline-item" data-target="section-iterations">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Iterations</span>
+        </a>
+    </nav>
+
+    <div class="project-hero">
+        <img src="images/emotional.png" alt="Melloow">
+    </div>
+
+    <main class="project-detail-section">
+        <div class="container">
+
+            <header class="project-header">
+                <h1 class="project-detail-title">Melloow</h1>
+                <p class="project-detail-subtitle">Melt your emotions. An AR mobile app for anonymous emotional release, where feelings become physical objects you can throw away.</p>
+            </header>
+
+            <div class="project-meta">
+                <div class="project-meta-item">
+                    <h3>Role</h3>
+                    <p>Product Designer</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Platform</h3>
+                    <p>iOS · AR</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Tools</h3>
+                    <p>Figma · ARKit</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Type</h3>
+                    <p>AR · App Design</p>
+                </div>
+            </div>
+
+            <div class="project-content">
+
+                <div class="project-text" id="section-overview">
+                    <h2 class="project-section-title">Overview</h2>
+                    <p class="project-paragraph">
+                        Melloow is a solo academic project completed over one semester. I handled every stage end-to-end: user research, concept development, UX design, visual design, and interactive prototype.
+                    </p>
+                    <p class="project-paragraph">
+                        The project started with one question: how might we create a safe way for people to release emotions? Not process them publicly. Not share them with others. Just release them, privately, physically, completely.
+                    </p>
+                    <p class="project-paragraph">
+                        The answer became an AR mobile app where users write or speak an emotional message, watch it become a physical object in their space, and throw it away.
+                    </p>
+                </div>
+
+                <div class="project-text" id="section-research">
+                    <h2 class="project-section-title">Research</h2>
+                    <p class="project-paragraph">
+                        User research uncovered four consistent patterns in how people handle difficult emotions:
+                    </p>
+                    <p class="project-paragraph">
+                        <strong>Emotional withholding is the default.</strong> More than half of participants chose not to share their emotional experiences, not out of strength, but out of uncertainty.
+                    </p>
+                    <p class="project-paragraph">
+                        <strong>Sharing feels risky, not valuable.</strong> "They wouldn't understand." "I don't see a clear benefit." The perceived cost outweighed the potential relief.
+                    </p>
+                    <p class="project-paragraph">
+                        <strong>Distraction replaces processing.</strong> Scrolling, music, and work were the most common coping strategies, avoidance dressed as self-care.
+                    </p>
+                    <p class="project-paragraph">
+                        <strong>Relief is partial, not complete.</strong> Handling emotions alone offers temporary improvement, but the feeling always returns.
+                    </p>
+                </div>
+
+                <img src="images/melloow/3.png" alt="60% distraction stat" style="width:100%;border-radius:12px;margin:24px 0;border:none;display:block;">
+
+                <div class="project-text" id="section-insight">
+                    <h2 class="project-section-title">Key Insight</h2>
+                    <p class="project-paragraph">
+                        Emotional withholding is not always about independence. It often reflects uncertainty about emotional safety and the value of sharing.
+                    </p>
+                    <p class="project-paragraph">
+                        The solution doesn't need to be social. It needs to feel safe and complete.
+                    </p>
+                </div>
+
+                <img src="images/melloow/4.png" alt="How might we create a safe way for people to release emotions" style="width:100%;border-radius:12px;margin:24px 0;border:none;display:block;">
+
+                <div class="project-text" id="section-persona">
+                    <h2 class="project-section-title">Who It's For</h2>
+                    <p class="project-paragraph">
+                        Lina appears successful and positive online, but privately, emotional pressure accumulates. She drafts messages about her feelings and deletes them. She avoids sharing to protect her public image. She needs an outlet that doesn't require anyone else to be involved.
+                    </p>
+                </div>
+
+                <img src="images/melloow/2.png" alt="Lina Chen persona" style="width:100%;border-radius:12px;margin:24px 0;border:none;display:block;">
+
+                <div class="quote-block">
+                    <p>"I know I'm doing well, so I feel like I shouldn't complain."</p>
+                    <cite>Lina Chen, 28 · TikTok Creator · 300K followers</cite>
+                </div>
+
+                <div class="project-text" id="section-solution">
+                    <h2 class="project-section-title">The Solution</h2>
+                    <p class="project-paragraph">
+                        Melloow is an anonymous AR emotional release experience. The first thing it does is give you a new name and avatar. No account, no social. Just a space that belongs to you.
+                    </p>
+                    <p class="project-paragraph">
+                        Then you write or speak what you're feeling. Your emotion becomes a physical object in your space. You throw it away. The body completes what the mind starts.
+                    </p>
+                </div>
+
+                <img src="images/melloow/5.png" alt="Feature 01: Yours" style="width:100%;border-radius:12px;margin:24px 0;border:none;display:block;">
+                <img src="images/melloow/6.png" alt="Feature 02: Augmented Reality" style="width:100%;border-radius:12px;margin:24px 0;border:none;display:block;">
+
+                <div class="project-text" id="section-design">
+                    <h2 class="project-section-title">Design System</h2>
+                    <p class="project-paragraph">
+                        The visual language is intentionally soft: warm cream backgrounds, organic 3D blob shapes, and rounded pill buttons. Fraunces for display text, Plus Jakarta Sans for body. The palette pairs peach and mint, warm and calm, never clinical.
+                    </p>
+                </div>
+
+                <img src="images/melloow/7.png" alt="Style Guide" style="width:100%;border-radius:12px;margin:24px 0;border:none;display:block;">
+
+                <div class="project-text" id="section-iterations">
+                    <h2 class="project-section-title">Iterations</h2>
+                    <p class="project-paragraph">
+                        Design decisions were refined through usability testing. Each iteration addressed a specific friction point identified during testing.
+                    </p>
+                </div>
+
+                <img src="images/melloow/8.png" alt="Design iterations" style="width:100%;border-radius:12px;margin:24px 0;border:none;display:block;">
+
+            </div>
+
+            <div class="project-navigation">
+                <a href="project-3.html" class="project-nav-link">← Previous Project</a>
+                <a href="index.html" class="project-nav-link">Back to Work →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© <span id="current-year">2024</span> Jiaqi Gu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        (function () {
+            const items = document.querySelectorAll('.timeline-item');
+            const sections = Array.from(items).map(item =>
+                document.getElementById(item.dataset.target)
+            ).filter(Boolean);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        items.forEach(i => i.classList.remove('active'));
+                        const active = document.querySelector(`.timeline-item[data-target="${entry.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-30% 0px -60% 0px' });
+
+            sections.forEach(s => observer.observe(s));
+
+            window.addEventListener('scroll', () => {
+                const scrollBottom = window.scrollY + window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+                if (scrollBottom >= docHeight - 80) {
+                    items.forEach(i => i.classList.remove('active'));
+                    items[items.length - 1].classList.add('active');
+                }
+            });
+
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.getElementById(item.dataset.target);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

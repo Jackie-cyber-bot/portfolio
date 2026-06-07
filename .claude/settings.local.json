@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s http://localhost:8001/styles.css)",
+      "Bash(curl -s http://localhost:8001/navbar.html)",
+      "Bash(pkill -f \"http.server 8001\")",
+      "Bash(node --check /Users/jiaqigu/Desktop/portfolio/script.js)",
+      "Bash(python3 -c \":*)",
+      "Bash(grep -c \"data-theme\" /Users/jiaqigu/Desktop/portfolio/styles.css grep -rn \"data-theme\\\\|theme-toggle\\\\|localStorage.*theme\\\\|savedTheme\" /Users/jiaqigu/Desktop/portfolio/*.html)",
+      "Bash(wc -l ls /Users/jiaqigu/Desktop/portfolio/*.html)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(done)",
+      "Bash(grep -l \"localStorage\\\\|data-theme\\\\|savedTheme\" /Users/jiaqigu/Desktop/portfolio/*.html)",
+      "Bash(claude plugin:*)",
+      "WebSearch",
+      "WebFetch(domain:webflow.com)",
+      "WebFetch(domain:designerup.co)",
+      "WebFetch(domain:colorlib.com)",
+      "WebFetch(domain:www.banani.co)",
+      "WebFetch(domain:pafolios.com)",
+      "WebFetch(domain:www.wallofportfolios.in)",
+      "WebFetch(domain:vanschneider.com)",
+      "WebFetch(domain:blog.uxfol.io)",
+      "WebFetch(domain:www.framer.com)",
+      "WebFetch(domain:medium.com)",
+      "Bash(claude mcp:*)"
+    ]
+  }
+}

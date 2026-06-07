@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mira Tarot | Jiaqi Gu</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-hero {
+            width: 100%;
+            aspect-ratio: 16 / 7;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        .project-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            background: rgba(26, 26, 26, 0.05);
+            border: 1.5px dashed rgba(26, 26, 26, 0.18);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 40px 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .img-placeholder span { font-family: var(--font-body); color: var(--text-secondary); font-size: 13px; }
+        .img-placeholder .placeholder-label {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .img-placeholder.hero-placeholder {
+            aspect-ratio: 16 / 7;
+            border-radius: 0;
+            margin: 0;
+            border: none;
+            background: rgba(26, 26, 26, 0.07);
+        }
+        .img-placeholder.wide { aspect-ratio: 16 / 5; }
+        .img-placeholder.tall { aspect-ratio: 4 / 3; }
+        .img-placeholder.phone { aspect-ratio: 9 / 16; }
+
+        /* Timeline nav */
+        .timeline-nav {
+            position: fixed;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 100;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+        .timeline-dot-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .timeline-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(184,112,78,0.45);
+            flex-shrink: 0;
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+            z-index: 1;
+        }
+        .timeline-line {
+            width: 1.5px;
+            height: 28px;
+            background: rgba(184,112,78,0.3);
+        }
+        .timeline-item:last-child .timeline-line { display: none; }
+        .timeline-label {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(184,112,78,0.5);
+            white-space: nowrap;
+            transition: color 0.25s, opacity 0.25s;
+            opacity: 0.5;
+            font-family: var(--font-body, sans-serif);
+            padding-bottom: 28px;
+        }
+        .timeline-item:hover .timeline-label,
+        .timeline-item.active .timeline-label { opacity: 1; }
+        .timeline-item.active .timeline-dot {
+            background: #B8704E;
+            transform: scale(1.5);
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+        .timeline-item.active .timeline-label { opacity: 1; color: #B8704E; }
+        .timeline-item:hover .timeline-dot {
+            background: #B8704E;
+            box-shadow: 0 0 6px 3px rgba(184,112,78,0.5);
+        }
+        .timeline-item:hover .timeline-label { opacity: 1; color: #B8704E; }
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 4px 2px rgba(184,112,78,0.5), 0 0 10px 4px rgba(184,112,78,0.25); }
+            50%       { box-shadow: 0 0 8px 4px rgba(184,112,78,0.8), 0 0 20px 8px rgba(184,112,78,0.4); }
+        }
+        @media (max-width: 900px) { .timeline-nav { display: none; } }
+
+        .project-section-title { color: #B8704E; }
+        [id^="section-"] { scroll-margin-top: 100px; }
+
+        .screenshots-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .screenshots-row-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        @media (max-width: 768px) {
+            .screenshots-row,
+            .screenshots-row-2 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Jiaqi Gu" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link" data-section="work">Work</a></li>
+                <li><a href="index.html#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="timeline-nav" aria-label="Page sections">
+        <a href="#section-overview" class="timeline-item" data-target="section-overview">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Overview</span>
+        </a>
+        <a href="#section-problem" class="timeline-item" data-target="section-problem">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">The Problem</span>
+        </a>
+        <a href="#section-built" class="timeline-item" data-target="section-built">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">What I Built</span>
+        </a>
+        <a href="#section-ai" class="timeline-item" data-target="section-ai">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">AI</span>
+        </a>
+        <a href="#section-web" class="timeline-item" data-target="section-web">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Web Version</span>
+        </a>
+        <a href="#section-wheel" class="timeline-item" data-target="section-wheel">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">The Wheel</span>
+        </a>
+        <a href="#section-gesture" class="timeline-item" data-target="section-gesture">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Gesture</span>
+        </a>
+        <a href="#section-compare" class="timeline-item" data-target="section-compare">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">App vs. Web</span>
+        </a>
+    </nav>
+
+    <div class="project-hero">
+        <img src="images/tarot.png" alt="Tarot">
+    </div>
+
+    <main class="project-detail-section">
+        <div class="container">
+
+            <header class="project-header">
+                <h1 class="project-detail-title">Mira Tarot</h1>
+                <p class="project-detail-subtitle">A full-featured tarot reading iOS app, designed and built solo for readers who can't always be there when their clients need guidance.</p>
+            </header>
+
+            <div class="project-meta">
+                <div class="project-meta-item">
+                    <h3>Role</h3>
+                    <p>Design · Development</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Type</h3>
+                    <p>iOS App · Personal Project</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Tools</h3>
+                    <p>Figma · SwiftUI · Xcode</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Status</h3>
+                    <p>Ongoing · Testing & Launch</p>
+                </div>
+            </div>
+
+            <div class="project-content">
+
+                <div class="project-text" id="section-overview">
+                    <h2 class="project-section-title">Overview</h2>
+                    <p class="project-paragraph">
+                        I've been reading tarot for years, for myself and for friends. But being available whenever someone needs a reading isn't always possible. At the same time, most tarot apps on the market feel either too generic or too shallow to replace a real reading.
+                    </p>
+                    <p class="project-paragraph">
+                        This project started as a personal tool and grew into a full iOS app with AI-powered interpretation, designed to bridge the gap between a human reader and an on-demand experience.
+                    </p>
+                </div>
+
+                <div class="project-text" id="section-problem">
+                    <h2 class="project-section-title">The Problem</h2>
+                    <p class="project-paragraph">
+                        Tarot readers, myself included, often can't respond to clients in real time. A question that feels urgent at 2am doesn't wait until morning. And while messaging a reader is personal, some questions are small enough to be answered without a full session.
+                    </p>
+                    <p class="project-paragraph">
+                        I validated this pain point with tarot practitioner friends who shared the same frustration: clients needed help, but immediate availability wasn't always realistic.
+                    </p>
+                </div>
+
+                <img src="images/tarot_1.jpg" alt="Problem Diagram" style="width:100%;height:320px;object-fit:cover;border-radius:12px;display:block;border:none;margin:24px 0;">
+
+                <div class="project-text">
+                    <h2 class="project-section-title">Who It's For</h2>
+                    <p class="project-paragraph">
+                        Three primary users shaped the design: tarot enthusiasts who want to do self-readings anytime, practicing readers whose clients need quick answers between sessions, and beginners learning the cards through daily practice.
+                    </p>
+                </div>
+
+                <div class="screenshots-row">
+                    <img src="images/tarot_2.png" alt="Persona: Enthusiast" style="width:100%;border-radius:12px;display:block;border:none;">
+                    <img src="images/tarot_3.png" alt="Persona: Practitioner" style="width:100%;border-radius:12px;display:block;border:none;">
+                    <img src="images/tarot_4.png" alt="Persona: Beginner" style="width:100%;border-radius:12px;display:block;border:none;">
+                </div>
+
+                <div class="project-text" id="section-built">
+                    <h2 class="project-section-title">What I Built</h2>
+                    <p class="project-paragraph">
+                        The app is structured around three core experiences, mirroring how people actually use tarot, not how apps typically present it.
+                    </p>
+                </div>
+
+                <div class="screenshots-row" style="max-width:720px;margin:24px auto;">
+                    <img src="images/tarot_5.png" alt="Today's Reading tab" style="width:100%;height:380px;object-fit:cover;object-position:top;border-radius:12px;display:block;border:none;">
+                    <img src="images/tarot_6.png" alt="Spread Menu tab" style="width:100%;height:380px;object-fit:cover;object-position:top;border-radius:12px;display:block;border:none;">
+                    <img src="images/tarot_7.png" alt="Card Library tab" style="width:100%;height:380px;object-fit:cover;object-position:top;border-radius:12px;display:block;border:none;">
+                </div>
+
+                <div class="project-text">
+                    <h2 class="project-section-title">Today's Reading</h2>
+                    <p class="project-paragraph">
+                        A daily card pull with personalized guidance, designed to become a quiet morning ritual. One card, one focus, one intention for the day.
+                    </p>
+                </div>
+
+                <div style="max-width:260px;margin:24px auto;">
+                    <img src="images/tarot_8.png" alt="Daily Reading" style="width:100%;border-radius:12px;display:block;border:none;">
+                </div>
+
+                <div class="project-text">
+                    <h2 class="project-section-title">Spread Readings</h2>
+                    <p class="project-paragraph">
+                        Eight spread options, from a single-card pull to the Celtic Cross, match the depth of the question being asked. Upright and reversed positions are randomized, just like a real shuffle.
+                    </p>
+                </div>
+
+
+                <div class="project-text">
+                    <h2 class="project-section-title">Design Decisions</h2>
+                    <p class="project-paragraph">
+                        The UI uses a deep purple-black background, an intentional contrast to most apps which feel either too occult or too clinical. The goal was something that felt personal and calm, not theatrical.
+                    </p>
+                    <p class="project-paragraph">
+                        Navigation is kept to three tabs, mirroring how readers think: today / a reading / the cards. No unnecessary layers.
+                    </p>
+                </div>
+
+
+                <div class="project-text" id="section-ai">
+                    <h2 class="project-section-title">AI Interpretation</h2>
+                    <p class="project-paragraph">
+                        The core insight: small questions don't need a 30-minute session. AI interpretation powered by OpenAI replicates the personalized, nuanced response a human reader gives, making it possible to get a real answer at 2am without waiting.
+                    </p>
+                </div>
+
+                <div class="project-text">
+                    <h2 class="project-section-title">Process</h2>
+                    <p class="project-paragraph">
+                        Solo: design and development, AI-assisted.
+                    </p>
+                </div>
+
+
+                <div class="project-text">
+                    <h2 class="project-section-title">Status</h2>
+                    <p class="project-paragraph">
+                        Core features are complete and currently in testing. AI interpretation is being built in parallel, with full integration expected within the next week.
+                    </p>
+                </div>
+
+                <div style="max-width:800px;margin:24px auto;">
+                    <img src="images/tarot_9.png" alt="Build Status" style="width:100%;border-radius:12px;display:block;border:none;">
+                </div>
+
+            </div>
+
+            <!-- ── Web ── -->
+            <div style="border-top: 1px solid rgba(26,26,26,0.12); margin: 80px 0 64px;"></div>
+
+            <div class="project-content">
+                <div class="project-text">
+                    <h2 class="project-section-title">Also Built: Mira Tarot Web</h2>
+                    <p class="project-paragraph">
+                        Alongside the iOS app, I built a gesture-controlled tarot website. Using your device camera, an open palm gesture draws the cards — the interaction is designed to feel physical, not digital. Try it yourself:
+                    </p>
+                    <p class="project-paragraph">
+                        <a href="https://jiaqigu.com/tarot/" target="_blank" style="color: #B8704E; text-underline-offset: 3px;">jiaqigu.com/tarot →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-navigation">
+                <a href="project-2.html" class="project-nav-link">← Previous Project</a>
+                <a href="project-4.html" class="project-nav-link">Next Project →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© <span id="current-year">2024</span> Jiaqi Gu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        (function () {
+            const items = document.querySelectorAll('.timeline-item');
+            const sections = Array.from(items).map(item =>
+                document.getElementById(item.dataset.target)
+            ).filter(Boolean);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        items.forEach(i => i.classList.remove('active'));
+                        const active = document.querySelector(`.timeline-item[data-target="${entry.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-10% 0px -80% 0px' });
+
+            sections.forEach(s => observer.observe(s));
+
+            window.addEventListener('scroll', () => {
+                const scrollBottom = window.scrollY + window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+                if (scrollBottom >= docHeight - 80) {
+                    items.forEach(i => i.classList.remove('active'));
+                    items[items.length - 1].classList.add('active');
+                }
+            }, { passive: true });
+
+            items.forEach(item => {
+                item.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.getElementById(item.dataset.target);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

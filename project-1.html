@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nook | Jiaqi Gu</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-hero {
+            width: 100%;
+            aspect-ratio: 16 / 7;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        .project-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            background: rgba(26, 26, 26, 0.05);
+            border: 1.5px dashed rgba(26, 26, 26, 0.18);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 40px 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .img-placeholder span { font-family: var(--font-body); color: var(--text-secondary); font-size: 13px; }
+        .img-placeholder .placeholder-label {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .img-placeholder.hero-placeholder {
+            aspect-ratio: 16 / 7;
+            border-radius: 0;
+            margin: 0;
+            border: none;
+            background: rgba(26, 26, 26, 0.07);
+        }
+        .img-placeholder.wide { aspect-ratio: 16 / 5; }
+        .img-placeholder.tall { aspect-ratio: 4 / 3; }
+        .img-placeholder.phone { aspect-ratio: 9 / 16; }
+
+        .screenshots-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .screenshots-row-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .persona-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 32px 0;
+        }
+
+        /* Primary persona (Sofia) */
+        .persona-card {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+        .persona-card-primary {
+            border: 1px solid rgba(184,112,78,0.35);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .persona-photo-wrap {
+            position: relative;
+        }
+        .persona-photo {
+            width: 180px;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 8px;
+            display: block;
+            filter: grayscale(8%);
+        }
+        .persona-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 28px;
+            height: 28px;
+            background: #B8704E;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.02em;
+        }
+        .persona-info {
+            padding-top: 4px;
+            text-align: left;
+        }
+        .persona-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin: 0 0 6px;
+        }
+        .persona-type {
+            font-size: 11px;
+            color: #B8704E;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin: 0 0 20px;
+            display: block;
+        }
+        .persona-info p {
+            font-size: 13px;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin: 0 0 12px;
+        }
+        .persona-divider {
+            width: 24px;
+            height: 1px;
+            background: #B8704E;
+            margin: 20px 0 16px;
+        }
+        .persona-key-need-label {
+            font-size: 11px;
+            color: #B8704E;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin: 0 0 6px;
+            display: block;
+        }
+        .persona-key-need-text {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-primary) !important;
+            font-style: italic;
+        }
+
+        .persona-focus-note {
+            font-size: 12px;
+            color: #B8704E;
+            font-style: italic;
+            line-height: 1.65;
+            padding: 12px 16px;
+            border-left: 2px solid #B8704E;
+            margin: 0 0 40px;
+            text-align: left;
+        }
+        /* Timeline */
+        .timeline-nav {
+            position: fixed;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 100;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+        .timeline-dot-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .timeline-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(184,112,78,0.45);
+            flex-shrink: 0;
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+            z-index: 1;
+        }
+        .timeline-line {
+            width: 1.5px;
+            height: 28px;
+            background: rgba(184,112,78,0.3);
+        }
+        .timeline-item:last-child .timeline-line {
+            display: none;
+        }
+        .timeline-label {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(184,112,78,0.5);
+            white-space: nowrap;
+            transition: color 0.25s, opacity 0.25s;
+            opacity: 0.5;
+            font-family: var(--font-body, sans-serif);
+            padding-bottom: 28px;
+        }
+        .timeline-item:hover .timeline-label,
+        .timeline-item.active .timeline-label {
+            opacity: 1;
+        }
+        .timeline-item.active .timeline-dot {
+            background: #B8704E;
+            transform: scale(1.5);
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+        .timeline-item.active .timeline-label {
+            opacity: 1;
+            color: #B8704E;
+        }
+        .timeline-item:hover .timeline-dot {
+            background: #B8704E;
+            box-shadow: 0 0 6px 3px rgba(184,112,78,0.5);
+        }
+        .timeline-item:hover .timeline-label {
+            opacity: 1;
+            color: #B8704E;
+        }
+        @media (max-width: 1100px) {
+            .timeline-nav { display: none; }
+        }
+
+        .project-section-title { color: #B8704E; }
+        [id^="section-"] { scroll-margin-top: 100px; }
+
+        /* HUD Slideshow */
+        .hud-slideshow {
+            position: relative;
+            width: 70%;
+            margin: 24px auto;
+        }
+        .hud-slide { display: none; }
+        .hud-slide.active { display: block; }
+        .hud-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            transition: background 0.2s;
+            z-index: 2;
+        }
+        .hud-btn:hover { background: rgba(255,255,255,0.95); }
+        .hud-prev { left: -48px; }
+        .hud-next { right: -48px; }
+        .hud-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .hud-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(184,112,78,0.3);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .hud-dot.active { background: #B8704E; }
+
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 4px 2px rgba(184,112,78,0.5), 0 0 10px 4px rgba(184,112,78,0.25); }
+            50%       { box-shadow: 0 0 8px 4px rgba(184,112,78,0.8), 0 0 20px 8px rgba(184,112,78,0.4); }
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            margin: 24px 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .video-embed iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html"><img src="images/logo.png" alt="Jiaqi Gu" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link" data-section="work">Work</a></li>
+                <li><a href="index.html#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=jiaqig15@gmail.com" target="_blank" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="timeline-nav" aria-label="Page sections">
+        <a href="#section-brief" class="timeline-item" data-target="section-brief">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">The Brief</span>
+        </a>
+        <a href="#section-research" class="timeline-item" data-target="section-research">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Research</span>
+        </a>
+        <a href="#section-appflow" class="timeline-item" data-target="section-appflow">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">App Flow</span>
+        </a>
+        <a href="#section-boarding" class="timeline-item" data-target="section-boarding">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Boarding</span>
+        </a>
+        <a href="#section-hud" class="timeline-item" data-target="section-hud">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">In-Vehicle<br>HUD</span>
+        </a>
+        <a href="#section-icons" class="timeline-item" data-target="section-icons">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Icon<br>System</span>
+        </a>
+        <a href="#section-map" class="timeline-item" data-target="section-map">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">City Map</span>
+        </a>
+        <a href="#section-outcome" class="timeline-item" data-target="section-outcome">
+            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Outcome</span>
+        </a>
+    </nav>
+
+    <div class="project-hero">
+        <img src="images/zoox_cover.png" alt="Nook">
+    </div>
+
+    <main class="project-detail-section">
+        <div class="container">
+
+            <header class="project-header">
+                <h1 class="project-detail-title">Nook</h1>
+                <p class="project-detail-subtitle">A collaboration between Academy of Art University and Zoox , designing the digital experience for an autonomous micromobility pod.</p>
+            </header>
+
+            <div class="project-meta">
+                <div class="project-meta-item">
+                    <h3>Role</h3>
+                    <p>Product Designer</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Context</h3>
+                    <p>Academy of Art University × Zoox</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Tools</h3>
+                    <p>Figma · AE · Claude Code</p>
+                </div>
+                <div class="project-meta-item">
+                    <h3>Timeline</h3>
+                    <p>March to April 2026</p>
+                </div>
+            </div>
+
+            <div class="project-content">
+
+                <div class="project-text" id="section-brief">
+                    <h2 class="project-section-title">The Brief</h2>
+                    <p class="project-paragraph">
+                        Design a compact autonomous micromobility pod for 1–2 occupants , filling the gap between a scooter and a compact car. Fully app-hailed, driverless, and accessible to riders of all abilities. The vehicle must democratize the last mile and the local loop.
+                    </p>
+                    <p class="project-paragraph">
+                        While the team designed the physical vehicle (Nook), my focus was the digital layer: the app, the in-vehicle HUD, and the full interaction from boarding to arrival.
+                    </p>
+                </div>
+
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/SLRP7ri02no" title="Nook , Brief Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div class="project-text" id="section-research">
+                    <h2 class="project-section-title">Research</h2>
+                    <p class="project-paragraph">
+                        User research revealed two distinct passenger types with different needs. Daily commuters prioritize efficiency, predictability, and privacy , they want a clean ETA and nothing else. City newcomers want the opposite: flexibility, discovery, and a sense of connection to an unfamiliar place.
+                    </p>
+                    <p class="project-paragraph">
+                        Both groups shared core expectations: safety, comfort, and a feeling of control , even without a driver.
+                    </p>
+                </div>
+
+                <div class="persona-grid">
+                    <div class="persona-card persona-card-primary">
+                        <div class="persona-photo-wrap">
+                            <span class="persona-number">01</span>
+                            <img src="images/persona1.png" alt="Sofia Reyes" class="persona-photo">
+                        </div>
+                        <div class="persona-info">
+                            <h3>Sofia Reyes</h3>
+                            <span class="persona-type">New to San Francisco</span>
+                            <p>Sofia is new to San Francisco and wants to explore the city in a relaxed way.</p>
+                            <p>She is interested in local landmarks, scenic routes, small restaurants, and hidden places, but she does not always know where to go or how to plan the route. Regular ride-hailing apps feel too functional , they only focus on getting from point A to point B.</p>
+                            <p>For Sofia, Nook feels like a gentle city guide. She wants the ride to be part of the experience, not just transportation. Features like Scenic Route, Explore Mode, and landmark stories can help her feel more connected to the city , without over-planning.</p>
+                            <div class="persona-divider"></div>
+                            <span class="persona-key-need-label">Key need</span>
+                            <p class="persona-key-need-text">A relaxing and guided city exploration experience that combines transportation, local discovery, and scenic moments.</p>
+                        </div>
+                    </div>
+                    <p class="persona-focus-note">For this demo, we decided to focus on Sofia because her journey better shows Nook's unique experience.<br>She is not just commuting — she wants to explore the city, enjoy the scenery, and discover places around her.</p>
+
+                    <div class="persona-card">
+                        <div class="persona-photo-wrap">
+                            <span class="persona-number">02</span>
+                            <img src="images/persona2.png" alt="Jason Chen" class="persona-photo">
+                        </div>
+                        <div class="persona-info">
+                            <h3>Jason Chen</h3>
+                            <span class="persona-type">Daily Commuter</span>
+                            <p>Jason is a daily commuter living in San Mateo and working in downtown San Francisco.</p>
+                            <p>He usually takes Caltrain, so his main goal is to move between home, station, and office with less stress. After work, he often feels tired and does not want to spend extra time comparing apps, waiting in the rain, or worrying about missing the next train.</p>
+                            <p>For Jason, Nook is a reliable last-mile helper. He cares about timing, predictability, and simple information , the next Caltrain time, arrival estimate, a quick stop on the way. He wants the ride to feel calm, efficient, and easy to control.</p>
+                            <div class="persona-divider"></div>
+                            <span class="persona-key-need-label">Key need</span>
+                            <p class="persona-key-need-text">A predictable and low-stress short-distance ride that connects smoothly with public transit.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-text" id="section-appflow">
+                    <h2 class="project-section-title">The App Flow</h2>
+                    <p class="project-paragraph">
+                        Both Sofia and Jason are Nook users. Jason's needs are clear: efficiency, reliability, and low friction. Existing ride-hailing apps can solve that, and solving it well is enough.
+                    </p>
+                    <p class="project-paragraph">
+                        Sofia's needs are harder. She does not just want to arrive. She wants to feel the city while moving through it. The app addresses this through a single choice at booking: Direct or Scenic. A faster route, or one that passes through Fisherman's Wharf and Golden Gate Bridge. The decision happens before the ride begins, not buried in settings.
+                    </p>
+                    <p class="project-paragraph">
+                        Along the way, passengers can also place a pickup order from nearby restaurants, turning the ride into something more than transportation.
+                    </p>
+                </div>
+
+                <img src="images/zoox_1.png" alt="Nook app flow" style="width:55%; display:block; margin: 24px auto; border-radius:12px;">
+
+                <div class="project-text" id="section-boarding">
+                    <h2 class="project-section-title">Boarding Experience</h2>
+                    <p class="project-paragraph">
+                        When approaching Nook, passengers can unlock the vehicle from their phone or smartwatch. The unlock animation extends the circular symbol from the vehicle door, creating a more cohesive visual language across the physical and digital touchpoints.
+                    </p>
+                    <p class="project-paragraph">
+                        Once inside, soft ambient music plays as the HUD comes to life. Information appears gradually, like fog gathering, greeting the passenger by name and confirming the next stop and destination. A hand gesture prompt then invites them to swipe up and begin the ride.
+                    </p>
+                    <p class="project-paragraph">
+                        As the ride begins, the interface steps back. Text fades and disperses, leaving the outside view as the main focus. The HUD returns only when there is something worth showing, reinforcing the idea that the screen is a tool, not the main event — the city is.
+                    </p>
+                </div>
+
+                <div style="width:60%; margin: 24px auto; display:flex; gap:0; align-items:flex-start;">
+                    <img src="images/zoox_unlock.png" alt="Boarding unlock" style="width:50%; border-radius:12px;">
+                    <img src="images/zoox_watch.png" alt="Boarding watch" style="width:50%; border-radius:12px; margin-top:48px; margin-left:-40px;">
+                </div>
+
+                <img src="images/zoox_2.png" alt="HUD boarding screen" style="width:70%; display:block; margin: 24px auto; border-radius:12px;">
+                <div class="screenshots-row-2" style="width:70%; margin: 16px auto;">
+                    <img src="images/zoox_2_1.png" alt="HUD fading" style="width:100%; border-radius:12px;">
+                    <img src="images/zoox_2_2.png" alt="Screen clears to city view" style="width:100%; border-radius:12px;">
+                </div>
+
+                <div class="project-text" id="section-hud">
+                    <h2 class="project-section-title">In-Vehicle HUD</h2>
+                    <p class="project-paragraph">
+                        As the vehicle approaches a landmark, the HUD surfaces a 3D model of the location alongside basic information: the name, a short description, and its distance from the current position. The information appears briefly, then fades, keeping the screen uncluttered for the rest of the ride.
+                    </p>
+                    <p class="project-paragraph">
+                        The intent is not to turn the ride into a tour. It is to give passengers just enough context to feel oriented in the city, without requiring them to look anything up.
+                    </p>
+                </div>
+
+                <div class="hud-slideshow">
+                    <div class="hud-slide active">
+                        <video autoplay loop muted playsinline style="width:100%; border-radius:12px; display:block;">
+                            <source src="images/golden_gate.mov" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="hud-slide">
+                        <img src="images/zoox_3.png" style="width:100%; border-radius:12px; display:block;">
+                    </div>
+                    <div class="hud-slide">
+                        <img src="images/zoox_5.png" style="width:100%; border-radius:12px; display:block;">
+                    </div>
+                    <button class="hud-btn hud-prev" aria-label="Previous">&#8592;</button>
+                    <button class="hud-btn hud-next" aria-label="Next">&#8594;</button>
+                    <div class="hud-dots">
+                        <span class="hud-dot active"></span>
+                        <span class="hud-dot"></span>
+                        <span class="hud-dot"></span>
+                    </div>
+                </div>
+
+                <div class="project-text" id="section-icons">
+                    <h2 class="project-section-title">Icon System</h2>
+                    <p class="project-paragraph">
+                        A custom dot-matrix icon system for the in-vehicle interface. Each icon is built on a 12×12 binary grid , consistent, scalable, and visually distinct from standard UI icons. The style references the display aesthetic of classic transit systems.
+                    </p>
+                </div>
+
+                <img src="images/zoox_ux.png" alt="Icon System" style="width:70%; display:block; border-radius:12px; margin: 24px auto;">
+
+                <div class="project-text" id="section-map">
+                    <h2 class="project-section-title">City Map</h2>
+                    <p class="project-paragraph">
+                        A minimal line-art map of San Francisco built from real OSM street data, with 5,988 road segments rendered as fine white strokes. I built this through vibe coding, generating and refining the map programmatically from raw geographic data.
+                    </p>
+                    <p class="project-paragraph">
+                        A mask layer highlights the relevant area as the vehicle moves through the city, drawing the passenger's attention to their current location without cluttering the rest of the display.
+                    </p>
+                </div>
+
+                <div style="background:#2a2e2d; border-radius:12px; overflow:hidden; height:400px; width:70%; margin: 24px auto;">
+                    <img src="images/zoox_map.png" alt="SF city map" style="width:100%; height:100%; object-fit:cover; object-position:30% 70%; display:block;">
+                </div>
+
+                <div class="project-text" id="section-outcome">
+                    <h2 class="project-section-title">Outcome</h2>
+                    <p class="project-paragraph">
+                        The project was presented to the Zoox team. Explore Mode reframes the autonomous vehicle not just as transportation infrastructure, but as a way to help people feel at home in a new city — without a guide, a map app, or a driver.
+                    </p>
+                    <div style="display:flex; align-items:center; gap:14px; margin-top:28px; padding:20px 24px; background:rgba(26,26,26,0.04); border-left:3px solid var(--accent); border-radius:4px;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+                        <p style="margin:0; font-size:0.95rem; line-height:1.5; color:var(--text-primary);">
+                            Awarded <strong>Most Innovative</strong> at the Bay Area Design Challenge.
+                        </p>
+                    </div>
+                </div>
+
+                <img src="images/zoox_presentation.jpg" alt="Bay Area Design Challenge — Most Innovative award" style="width:70%; display:block; margin:24px auto; border-radius:12px;">
+                <img src="images/zoox_team.JPG" alt="Zoox presentation" style="width:70%; display:block; margin:24px auto; border-radius:12px;">
+                <img src="images/zoox_poster.png" alt="Nook poster" style="width:70%; display:block; margin:24px auto; border-radius:12px;">
+
+            </div>
+
+            <div class="project-navigation">
+                <a href="index.html" class="project-nav-link">← Back to Work</a>
+                <a href="project-2.html" class="project-nav-link">Next Project →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© <span id="current-year">2024</span> Jiaqi Gu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        (function () {
+            const slides = document.querySelectorAll('.hud-slide');
+            const dots = document.querySelectorAll('.hud-dot');
+            let current = 0;
+            function goTo(n) {
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = (n + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
+            document.querySelector('.hud-prev').addEventListener('click', () => goTo(current - 1));
+            document.querySelector('.hud-next').addEventListener('click', () => goTo(current + 1));
+            dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+        })();
+
+        (function () {
+            const items = document.querySelectorAll('.timeline-item');
+            const sections = Array.from(items).map(item =>
+                document.getElementById(item.dataset.target)
+            ).filter(Boolean);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        items.forEach(i => i.classList.remove('active'));
+                        const active = document.querySelector(`.timeline-item[data-target="${entry.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-10% 0px -80% 0px' });
+
+            sections.forEach(s => observer.observe(s));
+
+            items.forEach(item => {
+                item.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.getElementById(item.dataset.target);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

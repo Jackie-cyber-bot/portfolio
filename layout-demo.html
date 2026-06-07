@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #f0ece4; font-family: 'Inter', sans-serif; color: #1a1a1a; }
+
+/* ── NAV ── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(240,236,228,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(26,26,26,0.08);
+  display: flex; gap: 0; height: 48px;
+}
+.top-nav a {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(26,26,26,0.45); text-decoration: none;
+  border-right: 1px solid rgba(26,26,26,0.08);
+  transition: color 0.2s, background 0.2s;
+}
+.top-nav a:last-child { border-right: none; }
+.top-nav a:hover { color: #1a1a1a; background: rgba(26,26,26,0.04); }
+.top-nav a.active { color: #1a1a1a; background: rgba(26,26,26,0.06); }
+
+/* ── SECTION WRAPPER ── */
+.layout-section { display: none; padding-top: 48px; min-height: 100vh; }
+.layout-section.active { display: block; }
+
+.section-badge {
+  position: fixed; bottom: 24px; right: 24px; z-index: 99;
+  background: #1a1a1a; color: white;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px 14px; border-radius: 20px;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT A — Standard (current)
+═══════════════════════════════════════════ */
+#layout-a .hero {
+  width: 100%; aspect-ratio: 16/7;
+  background: #1a1a1a;
+  display: flex; align-items: center; justify-content: center;
+}
+#layout-a .hero span { color: rgba(255,255,255,0.2); font-size: 13px; letter-spacing: 0.1em; }
+#layout-a .container { max-width: 760px; margin: 0 auto; padding: 64px 24px; }
+#layout-a h1 { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 52px; font-weight: 300; margin-bottom: 16px; }
+#layout-a .subtitle { font-size: 16px; color: rgba(26,26,26,0.6); line-height: 1.7; margin-bottom: 48px; }
+#layout-a .meta { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; padding: 32px 0; border-top: 1px solid rgba(26,26,26,0.1); border-bottom: 1px solid rgba(26,26,26,0.1); margin-bottom: 64px; }
+#layout-a .meta h3 { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(26,26,26,0.4); margin-bottom: 6px; }
+#layout-a .meta p { font-size: 13px; }
+#layout-a .section-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(26,26,26,0.4); margin-bottom: 16px; }
+#layout-a .body-text { font-size: 16px; line-height: 1.8; color: rgba(26,26,26,0.75); margin-bottom: 32px; }
+#layout-a .img-block { width: 100%; aspect-ratio: 16/9; background: rgba(26,26,26,0.06); border-radius: 12px; margin: 32px 0; display: flex; align-items: center; justify-content: center; }
+#layout-a .img-block span { font-size: 12px; color: rgba(26,26,26,0.3); }
+#layout-a .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0; }
+#layout-a .img-row .img-block { margin: 0; aspect-ratio: 4/3; }
+
+/* ═══════════════════════════════════════════
+   LAYOUT B — Sticky sidebar nav
+═══════════════════════════════════════════ */
+#layout-b .hero {
+  width: 100%; aspect-ratio: 16/7;
+  background: #1a1a1a;
+  display: flex; align-items: center; justify-content: center;
+}
+#layout-b .hero span { color: rgba(255,255,255,0.2); font-size: 13px; letter-spacing: 0.1em; }
+#layout-b .b-layout { display: grid; grid-template-columns: 180px 1fr; max-width: 1100px; margin: 0 auto; padding: 0 24px; gap: 80px; }
+#layout-b .b-sidebar { padding-top: 64px; }
+#layout-b .b-sidebar-inner { position: sticky; top: 80px; }
+#layout-b .b-sidebar h1 { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 28px; font-weight: 300; margin-bottom: 32px; line-height: 1.2; }
+#layout-b .b-nav { display: flex; flex-direction: column; gap: 0; }
+#layout-b .b-nav a {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(26,26,26,0.35); text-decoration: none;
+  padding: 10px 0; border-left: 2px solid transparent;
+  padding-left: 12px; transition: all 0.2s;
+}
+#layout-b .b-nav a:hover { color: #1a1a1a; border-color: #1a1a1a; }
+#layout-b .b-nav a.active { color: #1a1a1a; border-color: #1a1a1a; }
+#layout-b .b-content { padding: 64px 0; }
+#layout-b .b-chapter { padding: 64px 0; border-top: 1px solid rgba(26,26,26,0.1); }
+#layout-b .b-chapter:first-child { border-top: none; padding-top: 0; }
+#layout-b .chapter-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(26,26,26,0.35); margin-bottom: 12px; }
+#layout-b .chapter-title { font-size: 28px; font-weight: 300; margin-bottom: 24px; }
+#layout-b .body-text { font-size: 15px; line-height: 1.8; color: rgba(26,26,26,0.7); margin-bottom: 20px; }
+#layout-b .img-block { width: 100%; aspect-ratio: 16/9; background: rgba(26,26,26,0.06); border-radius: 10px; margin: 24px 0; display: flex; align-items: center; justify-content: center; }
+#layout-b .img-block span { font-size: 12px; color: rgba(26,26,26,0.3); }
+#layout-b .img-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 24px 0; }
+#layout-b .img-row .img-block { margin: 0; aspect-ratio: 3/4; }
+
+/* ═══════════════════════════════════════════
+   LAYOUT C — Full-screen sections
+═══════════════════════════════════════════ */
+#layout-c .c-section {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 80px 60px; position: relative;
+}
+#layout-c .c-section:nth-child(1) { background: #1a1a1a; color: white; }
+#layout-c .c-section:nth-child(2) { background: #f0ece4; }
+#layout-c .c-section:nth-child(3) { background: #e8e2d6; }
+#layout-c .c-section:nth-child(4) { background: #d8d4cc; }
+#layout-c .c-section:nth-child(5) { background: #1a1a1a; color: white; }
+
+#layout-c .c-hero-content { max-width: 700px; }
+#layout-c .c-tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.4; margin-bottom: 24px; }
+#layout-c .c-title { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 80px; font-weight: 300; line-height: 1; margin-bottom: 32px; }
+#layout-c .c-desc { font-size: 18px; line-height: 1.7; opacity: 0.65; max-width: 480px; }
+#layout-c .c-meta { display: flex; gap: 48px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.15); }
+#layout-c .c-meta-item h3 { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.4; margin-bottom: 6px; }
+#layout-c .c-meta-item p { font-size: 13px; }
+
+#layout-c .c-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; }
+#layout-c .c-split-text .section-num { font-size: 60px; font-weight: 300; opacity: 0.08; line-height: 1; margin-bottom: -8px; }
+#layout-c .c-split-text .section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.4; margin-bottom: 16px; }
+#layout-c .c-split-text h2 { font-size: 32px; font-weight: 300; margin-bottom: 20px; }
+#layout-c .c-split-text p { font-size: 15px; line-height: 1.8; opacity: 0.65; }
+#layout-c .c-img { width: 100%; aspect-ratio: 4/3; background: rgba(26,26,26,0.08); border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+#layout-c .c-img span { font-size: 12px; color: rgba(26,26,26,0.3); }
+#layout-c .c-section:nth-child(1) .c-img { background: rgba(255,255,255,0.06); }
+#layout-c .c-section:nth-child(1) .c-img span { color: rgba(255,255,255,0.2); }
+#layout-c .c-section:nth-child(5) .c-img { background: rgba(255,255,255,0.06); }
+
+#layout-c .c-full { width: 100%; max-width: 1200px; margin: 0 auto; }
+#layout-c .c-full h2 { font-size: 40px; font-weight: 300; margin-bottom: 40px; }
+#layout-c .c-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+#layout-c .c-grid-item { aspect-ratio: 3/4; background: rgba(26,26,26,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+#layout-c .c-grid-item span { font-size: 11px; color: rgba(26,26,26,0.3); }
+
+/* ═══════════════════════════════════════════
+   LAYOUT D — Editorial / Magazine
+═══════════════════════════════════════════ */
+#layout-d { background: #f5f2ec; }
+#layout-d .d-hero { width: 100%; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+#layout-d .d-hero-left { background: #1a1a1a; display: flex; flex-direction: column; justify-content: flex-end; padding: 60px; }
+#layout-d .d-hero-left .tag { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+#layout-d .d-hero-left h1 { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 88px; font-weight: 300; color: white; line-height: 0.9; margin-bottom: 32px; }
+#layout-d .d-hero-left .meta-row { display: flex; gap: 32px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; }
+#layout-d .d-hero-left .meta-row span { font-size: 11px; color: rgba(255,255,255,0.4); }
+#layout-d .d-hero-right { display: flex; align-items: center; justify-content: center; background: rgba(26,26,26,0.05); }
+#layout-d .d-hero-right span { font-size: 12px; color: rgba(26,26,26,0.3); }
+
+#layout-d .d-body { max-width: 1100px; margin: 0 auto; padding: 80px 60px; }
+#layout-d .d-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px; padding-bottom: 80px; border-bottom: 1px solid rgba(26,26,26,0.1); }
+#layout-d .d-intro .drop-cap::first-letter { font-family: 'Bodoni Moda', serif; font-style: italic; float: left; font-size: 72px; line-height: 0.8; margin-right: 8px; margin-top: 8px; }
+#layout-d .d-intro p { font-size: 16px; line-height: 1.8; color: rgba(26,26,26,0.7); }
+#layout-d .d-intro-right { padding-top: 8px; }
+#layout-d .d-intro-right .pull-quote { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 28px; font-weight: 300; line-height: 1.4; color: rgba(26,26,26,0.8); border-left: 2px solid #1a1a1a; padding-left: 24px; margin-bottom: 32px; }
+#layout-d .d-intro-right p { font-size: 14px; line-height: 1.8; color: rgba(26,26,26,0.55); }
+
+#layout-d .d-spread { display: grid; grid-template-columns: 3fr 2fr; gap: 24px; margin-bottom: 80px; }
+#layout-d .d-spread .main-img { background: rgba(26,26,26,0.08); border-radius: 12px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+#layout-d .d-spread .main-img span { font-size: 12px; color: rgba(26,26,26,0.3); }
+#layout-d .d-spread .side-col { display: flex; flex-direction: column; gap: 24px; }
+#layout-d .d-spread .side-col .side-text { padding: 24px; background: white; border-radius: 12px; }
+#layout-d .d-spread .side-col .side-text h3 { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(26,26,26,0.4); margin-bottom: 10px; }
+#layout-d .d-spread .side-col .side-text p { font-size: 14px; line-height: 1.7; color: rgba(26,26,26,0.65); }
+#layout-d .d-spread .side-col .side-img { flex: 1; background: rgba(26,26,26,0.06); border-radius: 12px; display: flex; align-items: center; justify-content: center; min-height: 160px; }
+#layout-d .d-spread .side-col .side-img span { font-size: 11px; color: rgba(26,26,26,0.3); }
+
+#layout-d .d-full-img { width: 100%; aspect-ratio: 21/9; background: rgba(26,26,26,0.08); border-radius: 16px; margin-bottom: 80px; display: flex; align-items: center; justify-content: center; }
+#layout-d .d-full-img span { font-size: 12px; color: rgba(26,26,26,0.3); }
+
+#layout-d .d-text-section { display: grid; grid-template-columns: 180px 1fr; gap: 60px; margin-bottom: 64px; }
+#layout-d .d-text-section .section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(26,26,26,0.35); padding-top: 4px; }
+#layout-d .d-text-section .section-body h2 { font-size: 30px; font-weight: 300; margin-bottom: 20px; }
+#layout-d .d-text-section .section-body p { font-size: 15px; line-height: 1.8; color: rgba(26,26,26,0.65); }
+
+#layout-d .d-3col { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 80px; }
+#layout-d .d-3col .col-img { aspect-ratio: 3/4; background: rgba(26,26,26,0.06); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+#layout-d .d-3col .col-img span { font-size: 11px; color: rgba(26,26,26,0.3); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="#" class="active" onclick="show('a',this)">A · Standard</a>
+  <a href="#" onclick="show('b',this)">B · Sidebar Nav</a>
+  <a href="#" onclick="show('c',this)">C · Full-screen</a>
+  <a href="#" onclick="show('d',this)">D · Editorial</a>
+</nav>
+
+<!-- ═══ LAYOUT A ═══ -->
+<div id="layout-a" class="layout-section active">
+  <div class="hero"><span>Hero Image</span></div>
+  <div class="container">
+    <header style="padding-top:64px; margin-bottom:32px;">
+      <h1>Gesture</h1>
+      <p class="subtitle">Exploring gesture as a design medium — interactions that feel physical, intuitive, and alive.</p>
+    </header>
+    <div class="meta">
+      <div><h3>Role</h3><p>Interaction Designer</p></div>
+      <div><h3>Context</h3><p>Personal Project</p></div>
+      <div><h3>Tools</h3><p>Figma · Protopie</p></div>
+      <div><h3>Year</h3><p>2026</p></div>
+    </div>
+    <div class="project-content">
+      <p class="section-title">The Brief</p>
+      <p class="body-text">When touch becomes language — how can gesture move beyond tap and swipe into something more expressive and physical?</p>
+      <div class="img-block"><span>Full-width image</span></div>
+      <p class="section-title">Research</p>
+      <p class="body-text">Studied haptic feedback patterns, embodied interaction theory, and existing gesture vocabularies across iOS, Android, and gaming hardware.</p>
+      <div class="img-row">
+        <div class="img-block"><span>Image</span></div>
+        <div class="img-block"><span>Image</span></div>
+      </div>
+      <p class="section-title">Design</p>
+      <p class="body-text">Three gesture systems explored: pressure-sensitive surfaces, directional swipe libraries, and continuous motion tracking.</p>
+      <div class="img-block"><span>Full-width image</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LAYOUT B ═══ -->
+<div id="layout-b" class="layout-section">
+  <div class="hero"><span>Hero Image</span></div>
+  <div class="b-layout">
+    <div class="b-sidebar">
+      <div class="b-sidebar-inner">
+        <h1>Gesture</h1>
+        <nav class="b-nav">
+          <a href="#b-brief" class="active">Brief</a>
+          <a href="#b-research">Research</a>
+          <a href="#b-design">Design</a>
+          <a href="#b-prototype">Prototype</a>
+          <a href="#b-outcome">Outcome</a>
+        </nav>
+      </div>
+    </div>
+    <div class="b-content">
+      <div class="b-chapter" id="b-brief">
+        <p class="chapter-label">01 — Brief</p>
+        <h2 class="chapter-title">When touch becomes language</h2>
+        <p class="body-text">Exploring gesture as a design medium — interactions that feel physical, intuitive, and alive. What happens when we move beyond tap and swipe?</p>
+        <div class="img-block"><span>Image</span></div>
+      </div>
+      <div class="b-chapter" id="b-research">
+        <p class="chapter-label">02 — Research</p>
+        <h2 class="chapter-title">How people already move</h2>
+        <p class="body-text">Studied haptic feedback patterns, embodied interaction theory, and existing gesture vocabularies across iOS, Android, and gaming hardware.</p>
+        <div class="img-row">
+          <div class="img-block"><span>Image</span></div>
+          <div class="img-block"><span>Image</span></div>
+          <div class="img-block"><span>Image</span></div>
+        </div>
+      </div>
+      <div class="b-chapter" id="b-design">
+        <p class="chapter-label">03 — Design</p>
+        <h2 class="chapter-title">Three gesture systems</h2>
+        <p class="body-text">Pressure-sensitive surfaces, directional swipe libraries, and continuous motion tracking — each tested against real user scenarios.</p>
+        <div class="img-block"><span>Image</span></div>
+      </div>
+      <div class="b-chapter" id="b-prototype">
+        <p class="chapter-label">04 — Prototype</p>
+        <h2 class="chapter-title">Making it feel real</h2>
+        <p class="body-text">High-fidelity Protopie prototypes with spring physics and custom easing curves to simulate physical weight and resistance.</p>
+        <div class="img-block"><span>Image</span></div>
+      </div>
+      <div class="b-chapter" id="b-outcome">
+        <p class="chapter-label">05 — Outcome</p>
+        <h2 class="chapter-title">What gesture can be</h2>
+        <p class="body-text">A gesture vocabulary and design system that makes digital interactions feel embodied rather than abstract.</p>
+        <div class="img-block"><span>Image</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LAYOUT C ═══ -->
+<div id="layout-c" class="layout-section">
+  <!-- Section 1: Hero -->
+  <div class="c-section">
+    <div class="c-hero-content">
+      <p class="c-tag">Gesture · Interaction Design</p>
+      <h1 class="c-title">Gesture</h1>
+      <p class="c-desc">Exploring gesture as a design medium — interactions that feel physical, intuitive, and alive.</p>
+      <div class="c-meta">
+        <div class="c-meta-item"><h3>Role</h3><p>Interaction Designer</p></div>
+        <div class="c-meta-item"><h3>Tools</h3><p>Figma · Protopie</p></div>
+        <div class="c-meta-item"><h3>Year</h3><p>2026</p></div>
+      </div>
+    </div>
+  </div>
+  <!-- Section 2: Brief -->
+  <div class="c-section">
+    <div class="c-split">
+      <div class="c-split-text">
+        <div class="section-num">01</div>
+        <p class="section-label">The Brief</p>
+        <h2>When touch becomes language</h2>
+        <p>How can gesture move beyond tap and swipe into something more expressive? This project explores the boundary between physical and digital movement.</p>
+      </div>
+      <div class="c-img"><span>Image</span></div>
+    </div>
+  </div>
+  <!-- Section 3: Research -->
+  <div class="c-section">
+    <div class="c-split">
+      <div class="c-img"><span>Image</span></div>
+      <div class="c-split-text">
+        <div class="section-num">02</div>
+        <p class="section-label">Research</p>
+        <h2>How people already move</h2>
+        <p>Studied haptic feedback patterns, embodied interaction theory, and existing gesture vocabularies across iOS, Android, and gaming hardware.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Section 4: Design -->
+  <div class="c-section">
+    <div class="c-full">
+      <h2>Three gesture systems</h2>
+      <div class="c-grid">
+        <div class="c-grid-item"><span>Pressure</span></div>
+        <div class="c-grid-item"><span>Directional</span></div>
+        <div class="c-grid-item"><span>Motion</span></div>
+      </div>
+    </div>
+  </div>
+  <!-- Section 5: Outcome -->
+  <div class="c-section">
+    <div class="c-split">
+      <div class="c-split-text" style="color:white">
+        <div class="section-num" style="color:white">04</div>
+        <p class="section-label">Outcome</p>
+        <h2>What gesture can be</h2>
+        <p style="opacity:0.55">A gesture vocabulary and design system that makes digital interactions feel embodied rather than abstract.</p>
+      </div>
+      <div class="c-img" style="background:rgba(255,255,255,0.06)"><span style="color:rgba(255,255,255,0.2)">Image</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LAYOUT D ═══ -->
+<div id="layout-d" class="layout-section">
+  <div class="d-hero">
+    <div class="d-hero-left">
+      <span class="tag">Gesture · Interaction Design · 2026</span>
+      <h1>Ges-<br>ture</h1>
+      <div class="meta-row">
+        <span>Interaction Designer</span>
+        <span>Figma · Protopie</span>
+        <span>Personal Project</span>
+      </div>
+    </div>
+    <div class="d-hero-right"><span>Hero Image</span></div>
+  </div>
+
+  <div class="d-body">
+    <div class="d-intro">
+      <p class="drop-cap">When touch becomes language — this project explores gesture as a design medium. How can interaction move beyond tap and swipe into something more expressive, physical, and alive?</p>
+      <div class="d-intro-right">
+        <p class="pull-quote">"The best gesture disappears. You stop thinking about the hand and start thinking about the intention."</p>
+        <p>Three gesture systems were explored: pressure-sensitive surfaces, directional swipe libraries, and continuous motion tracking — each tested against real user scenarios to understand where gesture adds clarity and where it creates friction.</p>
+      </div>
+    </div>
+
+    <div class="d-spread">
+      <div class="main-img"><span>Main image</span></div>
+      <div class="side-col">
+        <div class="side-text">
+          <h3>Research insight</h3>
+          <p>Users already have embodied expectations — lifting, pushing, pulling. Design should align with those instincts, not fight them.</p>
+        </div>
+        <div class="side-img"><span>Image</span></div>
+      </div>
+    </div>
+
+    <div class="d-text-section">
+      <span class="section-label">Design</span>
+      <div class="section-body">
+        <h2>Three gesture systems</h2>
+        <p>Each system was prototyped at high fidelity with spring physics and custom easing curves to simulate physical weight and resistance — the difference between a drawer that floats and one that feels anchored.</p>
+      </div>
+    </div>
+
+    <div class="d-3col">
+      <div class="col-img"><span>Pressure</span></div>
+      <div class="col-img"><span>Directional</span></div>
+      <div class="col-img"><span>Motion</span></div>
+    </div>
+
+    <div class="d-full-img"><span>Full-width outcome image</span></div>
+  </div>
+</div>
+
+<div class="section-badge" id="badge">A · Standard</div>
+
+<script>
+const labels = { a: 'A · Standard', b: 'B · Sidebar Nav', c: 'C · Full-screen', d: 'D · Editorial' };
+function show(id, el) {
+  document.querySelectorAll('.layout-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.top-nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('layout-' + id).classList.add('active');
+  el.classList.add('active');
+  document.getElementById('badge').textContent = labels[id];
+  window.scrollTo(0,0);
+  return false;
+}
+
+// Sidebar nav active state on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.b-nav a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.b-nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+document.querySelectorAll('#layout-b .b-chapter').forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
