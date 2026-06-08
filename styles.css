@@ -1350,7 +1350,7 @@ p.work-intro-name strong {
 }
 
 .work-item-content-container::after {
-    content: 'View →';
+    content: 'View \2192';
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.1em;
@@ -1464,18 +1464,8 @@ p.work-intro-name strong {
     }
 }
 
-/* Mobile: single column cards */
-@media (max-width: 600px) {
-    .work-list.show-all-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-    }
-
-    .work-list.show-all-grid .work-item {
-        aspect-ratio: 16 / 9 !important;
-    }
-
-    /* Featured card: vertical stack on mobile */
+/* Medium viewports: stack featured card before text gets cramped */
+@media (max-width: 860px) {
     .work-list.show-all-grid > .work-category-featured article,
     .work-list.show-all-grid article.work-item-featured,
     .work-list.show-all-grid .work-item.work-item-featured,
@@ -1490,14 +1480,14 @@ p.work-intro-name strong {
     }
     .work-link-row .work-item-media-container {
         width: 100% !important;
-        height: 200px !important;
+        height: 280px !important;
         flex-shrink: 0;
     }
     .work-link-row .work-item-content-container {
         width: 100% !important;
         height: auto !important;
         min-height: 0 !important;
-        padding: 18px 20px !important;
+        padding: 24px 28px !important;
         align-items: flex-start;
         justify-content: flex-start !important;
         text-align: left;
@@ -1509,6 +1499,26 @@ p.work-intro-name strong {
         white-space: normal !important;
         overflow: visible !important;
         text-overflow: unset !important;
+    }
+}
+
+/* Mobile: single column cards */
+@media (max-width: 600px) {
+    .work-list.show-all-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .work-list.show-all-grid .work-item {
+        aspect-ratio: 16 / 9 !important;
+    }
+
+    /* Tighten image height and padding on small phones */
+    .work-link-row .work-item-media-container {
+        height: 200px !important;
+    }
+    .work-link-row .work-item-content-container {
+        padding: 18px 20px !important;
     }
 
     .work-intro-name strong {
