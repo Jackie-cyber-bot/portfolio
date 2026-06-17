@@ -153,8 +153,8 @@ body {
     /* Color Variables */
     --text-primary: #1A1A1A;
     --text-secondary: #6B6B6B;
-    --text-light: #AAA59F;
-    --bg-primary: #F0EDE7;
+    --text-light: #AAAAAA;
+    --bg-primary: #FAFAFA;
     --accent: #B8704E;
     
     /* Font Variables */
@@ -210,7 +210,7 @@ h1, h2, h3, h4, h5, h6,
 
 @media (hover: none) {
     .navbar {
-        background-color: rgba(248, 244, 240, 0.75);
+        background-color: rgba(250, 250, 250, 0.75);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
     }
@@ -1389,6 +1389,12 @@ p.work-intro-name strong {
 /* Coming soon: same 16:9 */
 .work-list.show-all-grid > [data-category="coming-soon"] article {
     aspect-ratio: 16 / 9 !important;
+}
+
+/* Solo card: span full row */
+.work-list.show-all-grid > .work-category.work-category-solo article {
+    grid-column: 1 / -1 !important;
+    aspect-ratio: 16 / 4 !important;
 }
 
 .work-link-row {
