@@ -1471,6 +1471,22 @@ p.work-intro-name strong {
     }
 }
 
+/* Solo cards on small screens: fixed image height instead of aspect-ratio */
+@media (max-width: 860px) {
+    .work-list.show-all-grid > .work-category.work-category-solo article {
+        aspect-ratio: unset !important;
+        height: auto !important;
+    }
+    .work-list.show-all-grid > .work-category.work-category-solo .work-item-media-container {
+        height: 220px !important;
+        width: 100% !important;
+    }
+    .work-list.show-all-grid > .work-category.work-category-solo .work-item-content-container {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+}
+
 /* Medium viewports: stack featured card before text gets cramped */
 @media (max-width: 860px) {
     .work-list.show-all-grid > .work-category-featured article,
