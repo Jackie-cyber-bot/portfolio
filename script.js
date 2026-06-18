@@ -267,7 +267,7 @@ function initFlowerTrail() {
     window.addEventListener('resize', resize);
 
     const LAG_MS    = 300;
-    const MIN_DIST  = 22;
+    const MIN_DIST  = 55;
     const MAX_PLANTS = 600;
 
     const GREENS = ['#1a5c12','#246b1a','#2d7a22','#357a20','#1c6e15','#228c20','#2a7a25','#3a8030'];
@@ -324,12 +324,12 @@ function initFlowerTrail() {
 
     function spawnCluster(cx, cy) {
         const now = performance.now();
-        const count = 16 + Math.floor(Math.random() * 13);
+        const count = 9 + Math.floor(Math.random() * 8);
         for (let i = 0; i < count; i++) {
             plants.push({
                 kind: 'grass',
-                x: cx + (Math.random()-0.5)*70,
-                y: cy + (Math.random()-0.5)*60,
+                x: cx + (Math.random()-0.5)*160,
+                y: cy + (Math.random()-0.5)*120,
                 h: 18 + Math.random()*28,
                 lean: (Math.random()-0.5)*0.85,
                 color: GREENS[Math.floor(Math.random()*GREENS.length)],
@@ -346,8 +346,8 @@ function initFlowerTrail() {
             const pal = FPAL[Math.floor(Math.random()*FPAL.length)];
             plants.push({
                 kind: 'flower',
-                x: cx + (Math.random()-0.5)*68,
-                y: cy + (Math.random()-0.5)*60,
+                x: cx + (Math.random()-0.5)*160,
+                y: cy + (Math.random()-0.5)*120,
                 rad: 4 + Math.random()*7,
                 np: 5 + Math.floor(Math.random()*4),
                 rot: Math.random()*TAU,
