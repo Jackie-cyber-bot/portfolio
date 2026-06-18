@@ -1301,7 +1301,6 @@ p.work-intro-name strong {
     padding: 18px 20px;
     gap: 6px;
     box-sizing: border-box;
-    border-top: 1px solid var(--text-light);
 }
 
 .work-item-tag {
@@ -1350,23 +1349,6 @@ p.work-intro-name strong {
     color: var(--text-secondary);
 }
 
-.work-item-content-container::after {
-    content: 'View \2192';
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-top: auto;
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.work-item-with-media:hover .work-item-content-container::after {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 .work-link-column {
     flex-direction: column;
