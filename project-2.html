@@ -22,88 +22,6 @@
             display: block;
         }
 
-        /* Timeline nav — same as Zoox */
-        .timeline-nav {
-            position: fixed;
-            left: 32px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            z-index: 100;
-        }
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-        }
-        .timeline-dot-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .timeline-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: rgba(184,112,78,0.45);
-            flex-shrink: 0;
-            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-            z-index: 1;
-        }
-        .timeline-line {
-            width: 1.5px;
-            height: 28px;
-            background: rgba(184,112,78,0.3);
-        }
-        .timeline-item:last-child .timeline-line {
-            display: none;
-        }
-        .timeline-label {
-            font-size: 10px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgba(184,112,78,0.5);
-            white-space: nowrap;
-            transition: color 0.25s, opacity 0.25s;
-            opacity: 0.5;
-            font-family: var(--font-body, sans-serif);
-            padding-bottom: 28px;
-        }
-        .timeline-item:hover .timeline-label,
-        .timeline-item.active .timeline-label {
-            opacity: 1;
-        }
-        .timeline-item.active .timeline-dot {
-            background: #B8704E;
-            transform: scale(1.5);
-            animation: dot-pulse 2s ease-in-out infinite;
-        }
-        .timeline-item.active .timeline-label {
-            opacity: 1;
-            color: #B8704E;
-        }
-        .timeline-item:hover .timeline-dot {
-            background: #B8704E;
-            box-shadow: 0 0 6px 3px rgba(184,112,78,0.5);
-        }
-        .timeline-item:hover .timeline-label {
-            opacity: 1;
-            color: #B8704E;
-        }
-        @keyframes dot-pulse {
-            0%, 100% { box-shadow: 0 0 4px 2px rgba(184,112,78,0.5), 0 0 10px 4px rgba(184,112,78,0.25); }
-            50%       { box-shadow: 0 0 8px 4px rgba(184,112,78,0.8), 0 0 20px 8px rgba(184,112,78,0.4); }
-        }
-        @media (max-width: 1100px) {
-            .timeline-nav { display: none; }
-        }
-
         .project-section-title { color: #B8704E; }
         [id^="section-"] { scroll-margin-top: 100px; }
 
@@ -116,7 +34,6 @@
         }
         .impact-card {
             background: rgba(184,112,78,0.06);
-            border: 1px solid rgba(184,112,78,0.18);
             border-radius: 12px;
             padding: 28px 24px;
             text-align: center;
@@ -198,9 +115,8 @@
 
         /* Pull quote */
         .pull-quote {
-            border-left: 2px solid #B8704E;
-            padding: 12px 20px;
-            margin: 32px auto;
+            padding: 0;
+            margin: 40px auto;
             max-width: 580px;
             text-align: left;
         }
@@ -232,25 +148,6 @@
         </div>
     </nav>
 
-    <nav class="timeline-nav" aria-label="Page sections">
-        <a href="#section-overview" class="timeline-item" data-target="section-overview">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
-            <span class="timeline-label">Overview</span>
-        </a>
-        <a href="#section-work" class="timeline-item" data-target="section-work">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
-            <span class="timeline-label">The Work</span>
-        </a>
-        <a href="#section-process" class="timeline-item" data-target="section-process">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
-            <span class="timeline-label">Process<br>Improvement</span>
-        </a>
-        <a href="#section-impact" class="timeline-item" data-target="section-impact">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span>
-            <span class="timeline-label">Impact</span>
-        </a>
-    </nav>
-
     <div class="project-hero">
         <img src="images/decor1.jpg" alt="DecorMatters">
     </div>
@@ -266,7 +163,7 @@
             <div class="project-meta">
                 <div class="project-meta-item">
                     <h3>Role</h3>
-                    <p>Design Operations Intern</p>
+                    <p>Design Intern</p>
                 </div>
                 <div class="project-meta-item">
                     <h3>Company</h3>
@@ -274,11 +171,11 @@
                 </div>
                 <div class="project-meta-item">
                     <h3>Timeline</h3>
-                    <p>March to May 2026</p>
+                    <p>March 2026 – Present</p>
                 </div>
                 <div class="project-meta-item">
                     <h3>Tools</h3>
-                    <p>Figma · Admin CMS</p>
+                    <p>Figma · Admin CMS · Claude Code · AI Image Generation</p>
                 </div>
             </div>
 
@@ -290,7 +187,7 @@
                         DecorMatters is a home design app where users participate in weekly challenges: decorating virtual rooms within a curated set of visual constraints. The quality of each challenge directly shapes how deeply users engage with the platform, and sustained engagement is what moves users toward a premium subscription.
                     </p>
                     <p class="project-paragraph">
-                        As a Design Operations Intern, I owned the end-to-end production of weekly challenges: sourcing images, selecting furniture, configuring each room, and maintaining visual consistency at scale. Roughly 36 challenges per week, across a two-week cycle each month.
+                        As a Design Operations Intern, I owned the end-to-end production of weekly challenges: sourcing images, selecting furniture, configuring each room, and maintaining visual consistency at scale. Roughly 30+ challenges per week, across a two-week cycle each month.
                     </p>
                 </div>
 
@@ -308,7 +205,7 @@
                             <span class="step-num">01</span>
                             <div class="step-body">
                                 <p class="step-title">Visual Research</p>
-                                <p class="step-desc">Sourcing reference images and interior trends to define the visual direction for the week's challenge set. Keeping 36 challenges fresh week after week required active research, not re-using what already worked.</p>
+                                <p class="step-desc">Sourcing reference images and interior trends to define the visual direction for the week's challenge set. Keeping 30+ challenges fresh week after week required active research, not re-using what already worked.</p>
                             </div>
                         </div>
                         <div class="process-step">
@@ -352,6 +249,29 @@
                     </p>
                 </div>
 
+                <div class="project-text" id="section-ai">
+                    <h2 class="project-section-title">AI-Assisted Content Creation</h2>
+                    <p class="project-paragraph">
+                        To keep up with the volume and freshness demands of 30+ weekly challenges, I integrated AI image generation into the content pipeline. Rather than relying solely on stock photography, I used AI to generate custom themed visuals that matched the specific aesthetic direction of each challenge set.
+                    </p>
+                    <p class="project-paragraph">
+                        The key insight was strategic, not just visual: themed AI-generated content naturally surfaced the app's paid AI features within the challenge experience, guiding users toward them organically rather than through direct promotion. This approach drove a daily conversion rate 33% above the team average.
+                    </p>
+                </div>
+
+                <div class="project-text" id="section-filter">
+                    <h2 class="project-section-title">Dynamic Animated Filters</h2>
+                    <p class="project-paragraph">
+                        Beyond content production, I independently designed and built animated overlay filters for the app's post-design sharing flow — where users apply a filter before posting their room designs.
+                    </p>
+                    <p class="project-paragraph">
+                        Each filter is designed in HTML/Canvas using procedural animation, then exported as APNG (iOS) and WebP (Android) for engineering handoff. I used Claude Code to implement seamless looping animation and manage the full export pipeline.
+                    </p>
+                    <video autoplay loop muted playsinline style="width:50%;border-radius:12px;margin-top:24px;display:block;margin-left:auto;margin-right:auto;">
+                        <source src="images/filter1.mov" type="video/mp4">
+                    </video>
+                </div>
+
                 <div class="project-text" id="section-impact">
                     <h2 class="project-section-title">Impact</h2>
                     <p class="project-paragraph">
@@ -360,12 +280,12 @@
 
                     <div class="impact-grid">
                         <div class="impact-card">
-                            <div class="impact-number">36</div>
+                            <div class="impact-number">30+</div>
                             <div class="impact-label">challenges produced per week</div>
                         </div>
                         <div class="impact-card">
-                            <div class="impact-number">~2wk</div>
-                            <div class="impact-label">production cycle owned end-to-end each month</div>
+                            <div class="impact-number">+33%</div>
+                            <div class="impact-label">above team average daily conversion rate via AI content</div>
                         </div>
                         <div class="impact-card">
                             <div class="impact-number">+23.4%</div>
@@ -395,43 +315,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        (function () {
-            const items = document.querySelectorAll('.timeline-item');
-            const sections = Array.from(items).map(item =>
-                document.getElementById(item.dataset.target)
-            ).filter(Boolean);
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        items.forEach(i => i.classList.remove('active'));
-                        const active = document.querySelector(`.timeline-item[data-target="${entry.target.id}"]`);
-                        if (active) active.classList.add('active');
-                    }
-                });
-            }, { rootMargin: '-10% 0px -80% 0px' });
-
-            sections.forEach(s => observer.observe(s));
-
-            // Activate last item when scrolled near bottom of page
-            window.addEventListener('scroll', () => {
-                const scrollBottom = window.scrollY + window.innerHeight;
-                const docHeight = document.documentElement.scrollHeight;
-                if (scrollBottom >= docHeight - 80) {
-                    items.forEach(i => i.classList.remove('active'));
-                    items[items.length - 1].classList.add('active');
-                }
-            }, { passive: true });
-
-            items.forEach(item => {
-                item.addEventListener('click', e => {
-                    e.preventDefault();
-                    const target = document.getElementById(item.dataset.target);
-                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-            });
-        })();
-    </script>
 </body>
 </html>

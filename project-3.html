@@ -55,76 +55,6 @@
         .img-placeholder.tall { aspect-ratio: 4 / 3; }
         .img-placeholder.phone { aspect-ratio: 9 / 16; }
 
-        /* Timeline nav */
-        .timeline-nav {
-            position: fixed;
-            left: 32px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            z-index: 100;
-        }
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-        }
-        .timeline-dot-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .timeline-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: rgba(184,112,78,0.45);
-            flex-shrink: 0;
-            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-            z-index: 1;
-        }
-        .timeline-line {
-            width: 1.5px;
-            height: 28px;
-            background: rgba(184,112,78,0.3);
-        }
-        .timeline-item:last-child .timeline-line { display: none; }
-        .timeline-label {
-            font-size: 10px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgba(184,112,78,0.5);
-            white-space: nowrap;
-            transition: color 0.25s, opacity 0.25s;
-            opacity: 0.5;
-            font-family: var(--font-body, sans-serif);
-            padding-bottom: 28px;
-        }
-        .timeline-item:hover .timeline-label,
-        .timeline-item.active .timeline-label { opacity: 1; }
-        .timeline-item.active .timeline-dot {
-            background: #B8704E;
-            transform: scale(1.5);
-            animation: dot-pulse 2s ease-in-out infinite;
-        }
-        .timeline-item.active .timeline-label { opacity: 1; color: #B8704E; }
-        .timeline-item:hover .timeline-dot {
-            background: #B8704E;
-            box-shadow: 0 0 6px 3px rgba(184,112,78,0.5);
-        }
-        .timeline-item:hover .timeline-label { opacity: 1; color: #B8704E; }
-        @keyframes dot-pulse {
-            0%, 100% { box-shadow: 0 0 4px 2px rgba(184,112,78,0.5), 0 0 10px 4px rgba(184,112,78,0.25); }
-            50%       { box-shadow: 0 0 8px 4px rgba(184,112,78,0.8), 0 0 20px 8px rgba(184,112,78,0.4); }
-        }
-        @media (max-width: 900px) { .timeline-nav { display: none; } }
-
         .project-section-title { color: #B8704E; }
         [id^="section-"] { scroll-margin-top: 100px; }
 
@@ -166,33 +96,6 @@
                 <span></span>
             </div>
         </div>
-    </nav>
-
-    <nav class="timeline-nav" aria-label="Page sections">
-        <a href="#section-overview" class="timeline-item" data-target="section-overview">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Overview</span>
-        </a>
-        <a href="#section-problem" class="timeline-item" data-target="section-problem">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">The Problem</span>
-        </a>
-        <a href="#section-built" class="timeline-item" data-target="section-built">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">What I Built</span>
-        </a>
-        <a href="#section-ai" class="timeline-item" data-target="section-ai">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">AI</span>
-        </a>
-        <a href="#section-web" class="timeline-item" data-target="section-web">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Web Version</span>
-        </a>
-        <a href="#section-wheel" class="timeline-item" data-target="section-wheel">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">The Wheel</span>
-        </a>
-        <a href="#section-gesture" class="timeline-item" data-target="section-gesture">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Gesture</span>
-        </a>
-        <a href="#section-compare" class="timeline-item" data-target="section-compare">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">App vs. Web</span>
-        </a>
     </nav>
 
     <div class="project-hero">
@@ -364,42 +267,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        (function () {
-            const items = document.querySelectorAll('.timeline-item');
-            const sections = Array.from(items).map(item =>
-                document.getElementById(item.dataset.target)
-            ).filter(Boolean);
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        items.forEach(i => i.classList.remove('active'));
-                        const active = document.querySelector(`.timeline-item[data-target="${entry.target.id}"]`);
-                        if (active) active.classList.add('active');
-                    }
-                });
-            }, { rootMargin: '-10% 0px -80% 0px' });
-
-            sections.forEach(s => observer.observe(s));
-
-            window.addEventListener('scroll', () => {
-                const scrollBottom = window.scrollY + window.innerHeight;
-                const docHeight = document.documentElement.scrollHeight;
-                if (scrollBottom >= docHeight - 80) {
-                    items.forEach(i => i.classList.remove('active'));
-                    items[items.length - 1].classList.add('active');
-                }
-            }, { passive: true });
-
-            items.forEach(item => {
-                item.addEventListener('click', e => {
-                    e.preventDefault();
-                    const target = document.getElementById(item.dataset.target);
-                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-            });
-        })();
-    </script>
 </body>
 </html>

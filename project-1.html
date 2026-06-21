@@ -82,9 +82,7 @@
             align-items: start;
         }
         .persona-card-primary {
-            border: 1px solid rgba(184,112,78,0.35);
-            border-radius: 12px;
-            padding: 24px;
+            padding: 0;
         }
         .persona-photo-wrap {
             position: relative;
@@ -164,92 +162,12 @@
 
         .persona-focus-note {
             font-size: 12px;
-            color: #B8704E;
+            color: var(--text-secondary);
             font-style: italic;
             line-height: 1.65;
-            padding: 12px 16px;
-            border-left: 2px solid #B8704E;
-            margin: 0 0 40px;
+            margin: 0 0 48px;
             text-align: left;
         }
-        /* Timeline */
-        .timeline-nav {
-            position: fixed;
-            left: 32px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            z-index: 100;
-        }
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-        }
-        .timeline-dot-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .timeline-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: rgba(184,112,78,0.45);
-            flex-shrink: 0;
-            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-            z-index: 1;
-        }
-        .timeline-line {
-            width: 1.5px;
-            height: 28px;
-            background: rgba(184,112,78,0.3);
-        }
-        .timeline-item:last-child .timeline-line {
-            display: none;
-        }
-        .timeline-label {
-            font-size: 10px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgba(184,112,78,0.5);
-            white-space: nowrap;
-            transition: color 0.25s, opacity 0.25s;
-            opacity: 0.5;
-            font-family: var(--font-body, sans-serif);
-            padding-bottom: 28px;
-        }
-        .timeline-item:hover .timeline-label,
-        .timeline-item.active .timeline-label {
-            opacity: 1;
-        }
-        .timeline-item.active .timeline-dot {
-            background: #B8704E;
-            transform: scale(1.5);
-            animation: dot-pulse 2s ease-in-out infinite;
-        }
-        .timeline-item.active .timeline-label {
-            opacity: 1;
-            color: #B8704E;
-        }
-        .timeline-item:hover .timeline-dot {
-            background: #B8704E;
-            box-shadow: 0 0 6px 3px rgba(184,112,78,0.5);
-        }
-        .timeline-item:hover .timeline-label {
-            opacity: 1;
-            color: #B8704E;
-        }
-        @media (max-width: 1100px) {
-            .timeline-nav { display: none; }
-        }
-
         .project-section-title { color: #B8704E; }
         [id^="section-"] { scroll-margin-top: 100px; }
 
@@ -338,33 +256,6 @@
         </div>
     </nav>
 
-    <nav class="timeline-nav" aria-label="Page sections">
-        <a href="#section-brief" class="timeline-item" data-target="section-brief">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">The Brief</span>
-        </a>
-        <a href="#section-research" class="timeline-item" data-target="section-research">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Research</span>
-        </a>
-        <a href="#section-appflow" class="timeline-item" data-target="section-appflow">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">App Flow</span>
-        </a>
-        <a href="#section-boarding" class="timeline-item" data-target="section-boarding">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Boarding</span>
-        </a>
-        <a href="#section-hud" class="timeline-item" data-target="section-hud">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">In-Vehicle<br>HUD</span>
-        </a>
-        <a href="#section-icons" class="timeline-item" data-target="section-icons">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Icon<br>System</span>
-        </a>
-        <a href="#section-map" class="timeline-item" data-target="section-map">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">City Map</span>
-        </a>
-        <a href="#section-outcome" class="timeline-item" data-target="section-outcome">
-            <span class="timeline-dot-wrap"><span class="timeline-dot"></span><span class="timeline-line"></span></span><span class="timeline-label">Outcome</span>
-        </a>
-    </nav>
-
     <div class="project-hero">
         <img src="images/zoox_cover.png" alt="Nook">
     </div>
@@ -409,7 +300,7 @@
                 </div>
 
                 <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/SLRP7ri02no" title="Nook , Brief Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/vVgcmsSbFbQ" title="Nook , Brief Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
                 <div class="project-text" id="section-research">
@@ -472,7 +363,7 @@
                     </p>
                 </div>
 
-                <img src="images/zoox_1.png" alt="Nook app flow" style="width:55%; display:block; margin: 24px auto; border-radius:12px;">
+                <img src="images/zoox_1.png" alt="Nook app flow" style="width:80%; display:block; margin: 48px auto; border-radius:12px;">
 
                 <div class="project-text" id="section-boarding">
                     <h2 class="project-section-title">Boarding Experience</h2>
@@ -487,13 +378,13 @@
                     </p>
                 </div>
 
-                <div style="width:60%; margin: 24px auto; display:flex; gap:0; align-items:flex-start;">
+                <div style="width:72%; margin: 48px auto; display:flex; gap:0; align-items:flex-start;">
                     <img src="images/zoox_unlock.png" alt="Boarding unlock" style="width:50%; border-radius:12px;">
                     <img src="images/zoox_watch.png" alt="Boarding watch" style="width:50%; border-radius:12px; margin-top:48px; margin-left:-40px;">
                 </div>
 
-                <img src="images/zoox_2.png" alt="HUD boarding screen" style="width:70%; display:block; margin: 24px auto; border-radius:12px;">
-                <div class="screenshots-row-2" style="width:70%; margin: 16px auto;">
+                <img src="images/zoox_2.png" alt="HUD boarding screen" style="width:80%; display:block; margin: 48px auto; border-radius:12px;">
+                <div class="screenshots-row-2" style="width:80%; margin: 16px auto 48px;">
                     <img src="images/zoox_2_1.png" alt="HUD fading" style="width:100%; border-radius:12px;">
                     <img src="images/zoox_2_2.png" alt="Screen clears to city view" style="width:100%; border-radius:12px;">
                 </div>
@@ -536,7 +427,7 @@
                     </p>
                 </div>
 
-                <img src="images/zoox_ux.png" alt="Icon System" style="width:70%; display:block; border-radius:12px; margin: 24px auto;">
+                <img src="images/zoox_ux.png" alt="Icon System" style="width:80%; display:block; border-radius:12px; margin: 48px auto;">
 
                 <div class="project-text" id="section-map">
                     <h2 class="project-section-title">City Map</h2>
@@ -548,7 +439,7 @@
                     </p>
                 </div>
 
-                <div style="background:#2a2e2d; border-radius:12px; overflow:hidden; height:400px; width:70%; margin: 24px auto;">
+                <div style="background:#2a2e2d; border-radius:12px; overflow:hidden; height:400px; width:80%; margin: 48px auto;">
                     <img src="images/zoox_map.png" alt="SF city map" style="width:100%; height:100%; object-fit:cover; object-position:30% 70%; display:block;">
                 </div>
 
@@ -565,9 +456,9 @@
                     </div>
                 </div>
 
-                <img src="images/zoox_presentation.jpg" alt="Bay Area Design Challenge — Most Innovative award" style="width:70%; display:block; margin:24px auto; border-radius:12px;">
-                <img src="images/zoox_team.JPG" alt="Zoox presentation" style="width:70%; display:block; margin:24px auto; border-radius:12px;">
-                <img src="images/zoox_poster.png" alt="Nook poster" style="width:70%; display:block; margin:24px auto; border-radius:12px;">
+                <img src="images/zoox_presentation.jpg" alt="Bay Area Design Challenge — Most Innovative award" style="width:80%; display:block; margin:48px auto; border-radius:12px;">
+                <img src="images/zoox_team.JPG" alt="Zoox presentation" style="width:80%; display:block; margin:48px auto; border-radius:12px;">
+                <img src="images/zoox_poster.png" alt="Nook poster" style="width:80%; display:block; margin:48px auto; border-radius:12px;">
 
             </div>
 
@@ -603,32 +494,6 @@
             dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
         })();
 
-        (function () {
-            const items = document.querySelectorAll('.timeline-item');
-            const sections = Array.from(items).map(item =>
-                document.getElementById(item.dataset.target)
-            ).filter(Boolean);
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        items.forEach(i => i.classList.remove('active'));
-                        const active = document.querySelector(`.timeline-item[data-target="${entry.target.id}"]`);
-                        if (active) active.classList.add('active');
-                    }
-                });
-            }, { rootMargin: '-10% 0px -80% 0px' });
-
-            sections.forEach(s => observer.observe(s));
-
-            items.forEach(item => {
-                item.addEventListener('click', e => {
-                    e.preventDefault();
-                    const target = document.getElementById(item.dataset.target);
-                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-            });
-        })();
     </script>
 </body>
 </html>
